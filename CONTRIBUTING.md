@@ -9,6 +9,13 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt && npm ci
 You need Python 3.12, Node 22+, and `shellcheck`. Supply your own game image (see the README); the
 tests that need it skip themselves without it.
 
+## Git hook (recommended)
+```sh
+tools/install-hooks.sh   # once per clone: runs lint, tests and a secret scan on every commit
+```
+The secret scan uses [`gitleaks`](https://github.com/gitleaks/gitleaks) if it is installed and is
+skipped with a note if not. GitHub secret scanning also applies once the repo is public.
+
 ## Before you open a pull request
 ```sh
 tools/lint.sh      # shellcheck, ruff, eslint, prettier; tools/lint.sh --fix applies fixes

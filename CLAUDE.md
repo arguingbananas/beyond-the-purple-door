@@ -16,6 +16,7 @@ Read `docs/Project-Notes.md` first; the README has setup.
 - Lint and format check: `tools/lint.sh` (add `--fix` to apply fixes)
 - Dependency audit: `tools/audit.sh`
 - Emulator: `tools/bcw_up.sh` / `tools/bcw_down.sh`
+- Enable the pre-commit hook (lint, tests, secret scan): `tools/install-hooks.sh`
 
 ## Files
 - Required: `README.md`, `LICENSE`, `.gitignore`, `requirements-dev.txt`, `package-lock.json`

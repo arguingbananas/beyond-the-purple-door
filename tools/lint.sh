@@ -7,6 +7,10 @@ set -euo pipefail
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$here"
 ruff="$here/.venv/bin/ruff"
+if [ ! -x "$ruff" ] || [ ! -d node_modules ]; then
+  echo "dev tools missing; run: python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt && npm ci" >&2
+  exit 1
+fi
 if [ "${1:-}" = "--fix" ]; then
   "$ruff" check --fix patches tools tests
   "$ruff" format patches tools tests
