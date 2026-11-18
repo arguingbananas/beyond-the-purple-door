@@ -29,7 +29,10 @@ Read `docs/Project-Notes.md` first; the README has setup.
 - Tests must not contact live services; the only network use is `tools/audit.sh` and installs.
 - Do not use `pkill -f` from Claude Code (it matches the tool's own shell); `tools/bcw_down.sh`
   stops the bridge by PID.
-- Push only `main` (local `refs/agents/*` checkpoint refs contain unrelated files).
+- This repo is self-contained: its git root is this folder. Never add files, history or references
+  from other projects in the parent directory, and never run git commands against the parent.
+- Push only `main`. Claude Code may create local `refs/agents/*` checkpoint refs; they are not part
+  of the project, so never push with `--all` or `--mirror`.
 
 ## Definition of done
 Sanity (`tools/verify.sh`) and full tests pass, `tools/lint.sh` is clean, `tools/audit.sh` shows no new
