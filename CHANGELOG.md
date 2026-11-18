@@ -9,7 +9,9 @@ there are no tagged releases yet.
 - Headless Apple2TS control through its built-in remote-control bridge: `tools/a2ts_bridge.mjs`,
   `tools/a2ts_ctl.mjs`, `tools/bcw_up.sh`, `tools/bcw_down.sh` (see `tools/README-a2ts.md`).
 - `tools/verify.sh` and `tools/ips_apply.py` to rebuild patched images and check hashes, plus an
-  optional CiderPress II filesystem check of each rebuilt image (skipped when `apps/cp2/cp2` is absent).
+  optional CiderPress II filesystem check (`tools/cp2_check.py`, skipped when `apps/cp2/cp2` is absent)
+  that compares each rebuilt image with the original: same notes, usage counts and files. It does
+  not rely on `cp2 test` alone, which reports "no failures" for a damaged DOS filesystem.
 - Test suite (`tools/test.sh`): Python `unittest`, Node `node:test`, and the hash checks.
 - Lint and audit tooling: `tools/lint.sh`, `tools/audit.sh`, pinned dev dependencies.
 - Pre-commit hook (`.githooks/`, enabled with `tools/install-hooks.sh`): lint, tests, and a gitleaks

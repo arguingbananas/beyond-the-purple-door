@@ -7,7 +7,6 @@ root, or the path in the BCW_IMAGE environment variable.
 
 import hashlib
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -22,8 +21,6 @@ CRACK_DIR = "Beyond Castle Wolfenstein (4am crack)"
 IMAGE = Path(os.environ.get("BCW_IMAGE") or ROOT / CRACK_DIR / f"{CRACK_DIR}.dsk")
 CRACK_SHA = "5898ae8f"
 DOOR_SHA, TERMINAL_SHA = "3d843c2c", "758ba06d"
-CP2 = Path(os.environ.get("CP2") or ROOT / "apps" / "cp2" / "cp2")
-CP2_OK = "Tested 18 files; no failures"
 
 
 def sha(path: Path) -> str:
@@ -144,34 +141,6 @@ class RealImage(TmpDirCase):
         terminal.patch_image(IMAGE, tonce)
         with self.assertRaises(terminal.PatchError):
             terminal.patch_image(tonce, self.tmp / "ttwice.dsk")
-
-
-@unittest.skipUnless(
-    IMAGE.exists() and CP2.exists(),
-    "needs the game image and CiderPress II (apps/cp2/cp2 or $CP2)",
-)
-class Cp2Validation(TmpDirCase):
-    """CiderPress II as an independent check that patched images are still sound DOS 3.3 disks."""
-
-    def cp2_test(self, image: Path) -> str:
-        # cp2 exits 0 even for a damaged catalog, so judge by its output, never its exit code
-        run = subprocess.run([str(CP2), "test", str(image)], capture_output=True, text=True)  # noqa: S603
-        return run.stdout
-
-    def test_original_and_patched_images_pass(self):
-        door_img, term_img = self.tmp / "door.dsk", self.tmp / "term.dsk"
-        door.patch_image(IMAGE, door_img)
-        terminal.patch_image(IMAGE, term_img)
-        for image in (IMAGE, door_img, term_img):
-            with self.subTest(image=image.name):
-                self.assertIn(CP2_OK, self.cp2_test(image))
-
-    def test_damaged_catalog_is_detected(self):
-        data = bytearray(IMAGE.read_bytes())
-        data[(17 * 16 + 15) * 256 + 11] = 99  # corrupt a pointer in the first catalog sector
-        bad = self.tmp / "bad.dsk"
-        bad.write_bytes(data)
-        self.assertNotIn(CP2_OK, self.cp2_test(bad))
 
 
 if __name__ == "__main__":

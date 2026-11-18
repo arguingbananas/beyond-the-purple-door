@@ -7,8 +7,8 @@ Read `docs/Project-Notes.md` first; the README has setup.
 - Python 3.12 (stdlib only), Node 22+ (tested on 24), shellcheck. Emulator tools also need Chromium
   and an Apple2TS web build in `a2ts-web/`, extracted from `apps/Apple2TS.AppImage`
   (see `tools/README-a2ts.md`). `apps/` and `a2ts-web/` are gitignored. Optional: CiderPress II in
-  `apps/cp2/` for the filesystem check in `tools/verify.sh` (note: `cp2 test` exits 0 even on a bad
-  catalog; judge it by its output).
+  `apps/cp2/` for the filesystem check in `tools/verify.sh` (`cp2 test` alone reports "no failures" for a
+  damaged DOS filesystem, so use `tools/cp2_check.py`, which compares against the original image).
 - The game image is not in this repo and must never be committed. Work on copies; never modify the
   original 4am image.
 - Dev tools: `python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt && npm ci`

@@ -11,7 +11,8 @@ the AppImage's source maps).
   `tools/verify.sh` to check each rebuilt image. Download `cp2_1.2.0_linux-x64_sc.zip` from its
   GitHub release, check that its SHA-256 equals the digest GitHub shows for that asset
   (`8c8748a0b484b4a778354146ffe4b6b44527f066b440a2e7bccebf4050948981`), and unzip it into
-  `apps/cp2/`. `cp2 test` exits 0 even on a damaged catalog, so judge it by its output.
+  `apps/cp2/`. `cp2 test` alone is not enough: it reports "no failures" and exits 0 for a damaged
+  DOS filesystem. `tools/cp2_check.py` compares each image with the original instead (see its header).
 - `a2ts-web/dist/`: the web build. In an empty scratch folder run
   `<repo>/apps/Apple2TS.AppImage --appimage-extract`, then copy
   `squashfs-root/resources/apple2ts-dist/dist` to `a2ts-web/dist`.

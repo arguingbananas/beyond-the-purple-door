@@ -24,18 +24,13 @@ check "terminal patcher" "$tmp/term.dsk"     758ba06d
 check "terminal IPS"     "$tmp/ips_term.dsk" 758ba06d
 check "savegame IPS"     "$tmp/ips_save.dsk" ac664ef6
 
-# Optional: CiderPress II checks that each rebuilt image is still a sound DOS 3.3 filesystem.
-# Used when apps/cp2/cp2 (or $CP2) exists; skipped otherwise. cp2 exits 0 even on a damaged catalog,
-# so we require its exact "Tested 18 files; no failures" line instead of trusting the exit code.
+# Optional: CiderPress II checks that each rebuilt image is as sound a DOS 3.3 filesystem as the
+# original (same notes, usage counts and files). Used when apps/cp2/cp2 (or $CP2) exists, else skipped.
+# See tools/cp2_check.py for why `cp2 test` alone is not trusted.
 cp2="${CP2:-$here/apps/cp2/cp2}"
 if [ -x "$cp2" ]; then
-  for img in door term ips_save; do
-    if "$cp2" test "$tmp/$img.dsk" 2>&1 | grep -q '^Tested 18 files; no failures$'; then
-      echo "ok   cp2 filesystem test: $img"
-    else
-      echo "FAIL cp2 filesystem test: $img"; fail=1
-    fi
-  done
+  CP2="$cp2" python3 -I "$here/tools/cp2_check.py" "$v" "$tmp/door.dsk" "$tmp/term.dsk" "$tmp/ips_save.dsk" \
+    || fail=1
 else
   echo "skip cp2 filesystem test (apps/cp2/cp2 not found; see tools/README-a2ts.md)"
 fi
