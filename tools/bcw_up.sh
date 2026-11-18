@@ -6,8 +6,8 @@
 # The state embeds the disk it was made with (local-patch v3); a patched disk needs a new state (menu steps in README-a2ts.md).
 set -euo pipefail
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-dist="${A2TS_DIST:-$HOME/Projects/apple2/a2ts-web/dist}"
-state="${1:-$HOME/Projects/apple2/a2ts-web/states/bcw-cabinet-room-local-v3.a2ts}"
+dist="${A2TS_DIST:-$here/a2ts-web/dist}"
+state="${1:-$here/a2ts-web/states/bcw-cabinet-room-local-v3.a2ts}"
 ctl() { node "$here/tools/a2ts_ctl.mjs" "$@"; }
 "$here/tools/bcw_down.sh" >/dev/null 2>&1 || true
 nohup node "$here/tools/a2ts_bridge.mjs" --dist "$dist" --chromium >"${TMPDIR:-/tmp}/a2ts-bridge.log" 2>&1 &

@@ -4,7 +4,7 @@ No window, no foreground focus. Apple2TS's web build runs in headless Chromium a
 through its built-in remote-control bridge (`?remoteControl=1`, see `src/ui/api/remotecontrol.ts` in
 the AppImage's source maps).
 
-## One-time setup (outside git, in `~/Projects/apple2/a2ts-web/`)
+## One-time setup (in `a2ts-web/` at the repo root, which is gitignored)
 - `dist/` is the web build: `Apple2TS.AppImage --appimage-extract`, then copy
   `squashfs-root/resources/apple2ts-dist/dist`.
 - `states/bcw-cabinet-room-local-v3.a2ts` is an exported emulator state (paused in room `$3C`, local
