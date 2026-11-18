@@ -11,6 +11,7 @@ state="${1:-$here/a2ts-web/states/bcw-cabinet-room-local-v3.a2ts}"
 ctl() { node "$here/tools/a2ts_ctl.mjs" "$@"; }
 "$here/tools/bcw_down.sh" >/dev/null 2>&1 || true
 nohup node "$here/tools/a2ts_bridge.mjs" --dist "$dist" --chromium >"${TMPDIR:-/tmp}/a2ts-bridge.log" 2>&1 &
+echo $! >"${TMPDIR:-/tmp}/a2ts-bridge.pid"
 for _ in $(seq 60); do ctl getStatus >/dev/null 2>&1 && break; sleep 1; done
 sleep 5                                                  # the emulator worker starts a moment after the page connects
 room=""
