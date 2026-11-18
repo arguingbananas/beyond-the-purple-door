@@ -68,9 +68,11 @@ def file_entries(image: bytearray) -> dict[str, tuple[int, int, int, int]]:
             start = 0x0B + index * 0x23
             entry = catalog[start : start + 0x23]
             raw_name = entry[3:33]
-            name = bytes(value & 0x7F for value in raw_name).decode(
-                "ascii", errors="replace"
-            ).rstrip(" ")
+            name = (
+                bytes(value & 0x7F for value in raw_name)
+                .decode("ascii", errors="replace")
+                .rstrip(" ")
+            )
             if not name:
                 continue
             entries[name] = (
@@ -140,8 +142,7 @@ def patch_image(source: Path, destination: Path) -> None:
     image = bytearray(source.read_bytes())
     if len(image) != IMAGE_SIZE:
         raise PatchError(
-            f"Expected a 143,360-byte, 35-track DOS-order .dsk image; "
-            f"found {len(image)} bytes"
+            f"Expected a 143,360-byte, 35-track DOS-order .dsk image; found {len(image)} bytes"
         )
 
     entries = file_entries(image)
@@ -157,8 +158,7 @@ def patch_image(source: Path, destination: Path) -> None:
         load_address = int.from_bytes(first_data[:2], "little")
         if load_address != expected_load:
             raise PatchError(
-                f"Unexpected {name} load address ${load_address:04X}; "
-                f"expected ${expected_load:04X}"
+                f"Unexpected {name} load address ${load_address:04X}; expected ${expected_load:04X}"
             )
 
     for name, logical_offset, expected in SIGNATURES:

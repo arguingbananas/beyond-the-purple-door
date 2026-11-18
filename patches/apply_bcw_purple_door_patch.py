@@ -14,8 +14,9 @@ import sys
 from pathlib import Path
 
 from apply_bcw_terminal_patch import (
-    PatchError,
+    IMAGE_SIZE,
     SECTOR_SIZE,
+    PatchError,
     binary_byte_offset,
     file_data_sectors,
     file_entries,
@@ -44,7 +45,13 @@ SITE_NEW = bytes.fromhex("20B31E")  # JSR $1EB3
 
 
 def patch_image(source: Path, destination: Path) -> None:
+    if destination.exists():
+        raise PatchError(f"Refusing to overwrite existing output: {destination}")
     image = bytearray(source.read_bytes())
+    if len(image) != IMAGE_SIZE:
+        raise PatchError(
+            f"Expected a 143,360-byte, 35-track DOS-order .dsk image; found {len(image)} bytes"
+        )
     entries = file_entries(image)
 
     fhr_name = "@FHR"
@@ -59,21 +66,15 @@ def patch_image(source: Path, destination: Path) -> None:
     if stream_end % SECTOR_SIZE + len(STUB) > SECTOR_SIZE:
         raise PatchError("Stub does not fit in the last @FHR sector")
 
-    stub_offset = binary_byte_offset(
-        image, entries[fhr_name], fhr_name, STUB_ADDRESS - fhr_load
-    )
+    stub_offset = binary_byte_offset(image, entries[fhr_name], fhr_name, STUB_ADDRESS - fhr_load)
     if set(image[stub_offset : stub_offset + len(STUB)]) - {0x00, 0xFF}:
         raise PatchError("Stub area in @FHR is not unused padding")
     image[stub_offset : stub_offset + len(STUB)] = STUB
-    image[first_offset + 2 : first_offset + 4] = (length + len(STUB)).to_bytes(
-        2, "little"
-    )
+    image[first_offset + 2 : first_offset + 4] = (length + len(STUB)).to_bytes(2, "little")
 
     things = "^THINGS"
     things_load = 0x4800
-    site = binary_byte_offset(
-        image, entries[things], things, SITE_ADDRESS - things_load
-    )
+    site = binary_byte_offset(image, entries[things], things, SITE_ADDRESS - things_load)
     if bytes(image[site : site + 3]) != SITE_OLD:
         raise PatchError("Unexpected bytes at the ^THINGS patch site")
     image[site : site + 3] = SITE_NEW
@@ -85,7 +86,13 @@ def main() -> int:
     if len(sys.argv) != 3:
         print("usage: apply_bcw_purple_door_patch.py SOURCE.dsk DEST.dsk")
         return 2
-    patch_image(Path(sys.argv[1]), Path(sys.argv[2]))
+    try:
+        patch_image(Path(sys.argv[1]), Path(sys.argv[2]))
+    except (OSError, PatchError) as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 1
+    print(f"Patched disk written to {sys.argv[2]}")
+    print("The input image was not modified.")
     return 0
 
 
