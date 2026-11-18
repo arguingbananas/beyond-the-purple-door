@@ -2,7 +2,7 @@
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = ["a2ts-web", "bcw-purple-door-handoff"]
+extend-exclude = ["a2ts-web", "apps"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "S"]

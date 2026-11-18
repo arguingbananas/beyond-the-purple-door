@@ -52,6 +52,7 @@ tools/audit.sh           # pip-audit and npm audit on the dev dependencies
 | `tests/` | Unit tests (`unittest` and `node:test`). Tests that need the game image skip without it. |
 | `examples/` | Small runnable scripts: patch an image, read the room number from the emulator. |
 | `reference/` | Screenshots of the room. |
+| `apps/`, `a2ts-web/` | Local only and gitignored: the Apple2TS AppImage, its web build and saved emulator states. |
 
 Start with [`docs/Project-Notes.md`](docs/Project-Notes.md); [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) explains how the pieces fit, and [`ROADMAP.md`](ROADMAP.md) lists what is next. The local patch is the preferred one: it
 affects only room `$3C`, but guards can walk through the door too. The global terminal-barrier patch

@@ -4,7 +4,7 @@ cp2_*/
 __pycache__/
 Beyond Castle Wolfenstein (4am crack)/
 *.zip
-bcw-purple-door-handoff/
+apps/
 a2ts-web/
 .venv/
 node_modules/

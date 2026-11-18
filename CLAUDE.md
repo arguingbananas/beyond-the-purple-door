@@ -5,7 +5,8 @@ Read `docs/Project-Notes.md` first; the README has setup.
 
 ## Environment
 - Python 3.12 (stdlib only), Node 22+ (tested on 24), shellcheck. Emulator tools also need Chromium
-  and an Apple2TS web build in `a2ts-web/` (see `tools/README-a2ts.md`).
+  and an Apple2TS web build in `a2ts-web/`, extracted from `apps/Apple2TS.AppImage`
+  (see `tools/README-a2ts.md`). `apps/` and `a2ts-web/` are gitignored.
 - The game image is not in this repo and must never be committed. Work on copies; never modify the
   original 4am image.
 - Dev tools: `python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt && npm ci`

@@ -1,6 +1,6 @@
 node_modules/
 a2ts-web/
-bcw-purple-door-handoff/
+apps/
 package-lock.json
 *.md
 *.png

@@ -4,11 +4,14 @@ No window, no foreground focus. Apple2TS's web build runs in headless Chromium a
 through its built-in remote-control bridge (`?remoteControl=1`, see `src/ui/api/remotecontrol.ts` in
 the AppImage's source maps).
 
-## One-time setup (in `a2ts-web/` at the repo root, which is gitignored)
-- `dist/` is the web build: `Apple2TS.AppImage --appimage-extract`, then copy
-  `squashfs-root/resources/apple2ts-dist/dist`.
-- `states/bcw-cabinet-room-local-v3.a2ts` is an exported emulator state (paused in room `$3C`, local
-  patch v3 disk inside). Remake it whenever the patched disk changes (below).
+## One-time setup (gitignored folders at the repo root; nothing here is committed)
+- `apps/Apple2TS.AppImage`: the Apple2TS desktop release, downloaded from the Apple2TS project.
+  It is only used as the source of the web build below.
+- `a2ts-web/dist/`: the web build. In an empty scratch folder run
+  `<repo>/apps/Apple2TS.AppImage --appimage-extract`, then copy
+  `squashfs-root/resources/apple2ts-dist/dist` to `a2ts-web/dist`.
+- `a2ts-web/states/bcw-cabinet-room-local-v3.a2ts`: an exported emulator state (paused in room `$3C`,
+  local patch v3 disk inside). Remake it whenever the patched disk changes (below).
 
 ## Everyday use
 ```sh
