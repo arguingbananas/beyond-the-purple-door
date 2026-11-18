@@ -22,7 +22,9 @@ game: a raw DOS-order, 143,360-byte, 35-track `.dsk` with SHA-256 starting `5898
 
 Requirements: Python 3.12 (standard library only), Node 22 or newer (tested on 24), and `shellcheck`.
 Chromium and an Apple2TS web build are needed only for the emulator tools (see
-[`tools/README-a2ts.md`](tools/README-a2ts.md)).
+[`tools/README-a2ts.md`](tools/README-a2ts.md)). [CiderPress II](https://ciderpress2.com/) is
+optional: if `apps/cp2/cp2` exists, `tools/verify.sh` also checks each rebuilt image's DOS 3.3
+filesystem with it.
 
 ```sh
 tools/verify.sh                      # rebuild every patched image from your game image and check hashes (~1 s)
@@ -76,3 +78,7 @@ room and to drive the emulator menus.
 
 The emulator tools use [Apple2TS](https://github.com/ct6502/apple2ts) by Chris Torrence (CT6502),
 which is MIT licensed. Its web build is downloaded separately and is not redistributed here.
+
+The optional filesystem check uses [CiderPress II](https://github.com/fadden/CiderPress2) by Andy
+McFadden, whose source is Apache-2.0 licensed (its images and documentation are CC BY-SA 4.0). It is
+downloaded separately and is not redistributed here.

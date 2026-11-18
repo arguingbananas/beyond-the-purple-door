@@ -7,6 +7,11 @@ the AppImage's source maps).
 ## One-time setup (gitignored folders at the repo root; nothing here is committed)
 - `apps/Apple2TS.AppImage`: the Apple2TS desktop release, downloaded from the Apple2TS project.
   It is only used as the source of the web build below.
+- `apps/cp2/` (optional): [CiderPress II](https://github.com/fadden/CiderPress2) v1.2.0, used by
+  `tools/verify.sh` to check each rebuilt image. Download `cp2_1.2.0_linux-x64_sc.zip` from its
+  GitHub release, check that its SHA-256 equals the digest GitHub shows for that asset
+  (`8c8748a0b484b4a778354146ffe4b6b44527f066b440a2e7bccebf4050948981`), and unzip it into
+  `apps/cp2/`. `cp2 test` exits 0 even on a damaged catalog, so judge it by its output.
 - `a2ts-web/dist/`: the web build. In an empty scratch folder run
   `<repo>/apps/Apple2TS.AppImage --appimage-extract`, then copy
   `squashfs-root/resources/apple2ts-dist/dist` to `a2ts-web/dist`.
