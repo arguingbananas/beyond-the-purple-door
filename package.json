@@ -1,0 +1,20 @@
+{
+  "name": "bcw-purple-door-tools",
+  "private": true,
+  "description": "Dev tooling for the Beyond Castle Wolfenstein purple-door project (the tools themselves have no runtime dependencies)",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.mjs",
+    "lint": "eslint tools tests && prettier --check tools tests",
+    "format": "prettier --write tools tests"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1"
+  }
+}

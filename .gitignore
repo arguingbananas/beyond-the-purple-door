@@ -6,3 +6,6 @@ Beyond Castle Wolfenstein (4am crack)/
 *.zip
 bcw-purple-door-handoff/
 a2ts-web/
+.venv/
+node_modules/
+CLAUDE.local.md

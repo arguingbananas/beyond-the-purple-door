@@ -1,0 +1,11 @@
+# Tooling config only; this project is not a Python package. Dev tools: requirements-dev.txt
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["a2ts-web", "bcw-purple-door-handoff"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]   # assert is how tests work
