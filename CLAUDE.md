@@ -19,6 +19,8 @@ Read `docs/Project-Notes.md` first; the README has setup.
 - Lint and format check: `tools/lint.sh` (add `--fix` to apply fixes)
 - Dependency audit: `tools/audit.sh`
 - Emulator: `tools/bcw_up.sh` / `tools/bcw_down.sh`
+- Bridge actions and payloads for scripting the emulator: `docs/Bridge-API.md`
+- Optional overrides (`BCW_IMAGE`, `CP2`, `A2TS_DIST`, `A2TS_BRIDGE`): see the table in `README.md`
 - Enable the pre-commit hook (lint, tests, secret scan): `tools/install-hooks.sh`
 
 ## Files

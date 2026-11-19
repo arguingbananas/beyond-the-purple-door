@@ -32,6 +32,7 @@ unused padding after `@FHR` returns zero for that one cell in room `$3C`.
   `bcw_down.sh` stops exactly that process. Chromium runs in its own process group so the bridge can
   stop it and delete its temporary profile.
 - Emulator state, the web build and the game image are all gitignored; see `tools/README-a2ts.md`.
+- Every action and payload the bridge relays: `docs/Bridge-API.md`.
 
 ## Tests
 - `tests/test_ips_apply.py`, `tests/test_patchers.py`: Python `unittest`; synthetic images for error

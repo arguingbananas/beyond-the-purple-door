@@ -31,7 +31,10 @@ tools/bcw_down.sh
 setMemoryWriteWatchpoint, sendKeys, runInputSequence, setSpeedMode, importSaveState/exportSaveState,
 setMemory/writeMemory, stepInto/Over/Out, ...). `{"file":"path"}` in a payload is replaced by that
 file's base64 as `dataBase64`. `waitScreen <ref.png> [sec]` waits for a frame byte-identical to a
-reference (`tools/refs/`).
+reference (`tools/refs/`). Every action and its payload: [`docs/Bridge-API.md`](../docs/Bridge-API.md).
+
+Overrides (optional): `A2TS_DIST` points `bcw_up.sh` at another web build, and `A2TS_BRIDGE`
+(`host:port`) points `a2ts_ctl.mjs` at another bridge. See the table in the top-level README.
 
 ## Making a new state for a different disk (menus; verified by hand, not scripted)
 1. `node tools/a2ts_bridge.mjs --dist <dist> --disk <disk.dsk> --chromium &`  (disk loads and boots via `#game.dsk`)

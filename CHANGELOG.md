@@ -12,6 +12,7 @@ there are no tagged releases yet.
   optional CiderPress II filesystem check (`tools/cp2_check.py`, skipped when `apps/cp2/cp2` is absent)
   that compares each rebuilt image with the original: same notes, usage counts and files. It does
   not rely on `cp2 test` alone, which reports "no failures" for a damaged DOS filesystem.
+- `docs/Bridge-API.md`: every bridge action and payload, with the ones this project has verified.
 - Test suite (`tools/test.sh`): Python `unittest`, Node `node:test`, and the hash checks.
 - Lint and audit tooling: `tools/lint.sh`, `tools/audit.sh`, pinned dev dependencies.
 - Pre-commit hook (`.githooks/`, enabled with `tools/install-hooks.sh`): lint, tests, and a gitleaks
@@ -20,6 +21,8 @@ there are no tagged releases yet.
   `CONTRIBUTING.md`, `CLAUDE.md`, examples, GitHub Actions CI and Dependabot configuration.
 
 ### Changed
+- `tools/bcw_up.sh` checks that the saved state and web build exist before starting, and encodes the
+  state path as proper JSON.
 - Repository reorganized into `patches/`, `docs/`, `reference/`, `tools/`, `tests/`.
 - `apply_bcw_purple_door_patch.py` now refuses to overwrite an existing output file (including its
   own input), checks the image size, and reports errors cleanly instead of a traceback.

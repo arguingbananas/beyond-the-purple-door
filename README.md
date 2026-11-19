@@ -44,6 +44,17 @@ tools/lint.sh            # shellcheck, ruff, eslint, prettier (add --fix to appl
 tools/audit.sh           # pip-audit and npm audit on the dev dependencies
 ```
 
+### Environment variables (all optional)
+
+Nothing needs to be set; these only override the defaults.
+
+| Variable | Used by | Default |
+|---|---|---|
+| `BCW_IMAGE` | `tools/test.sh`, `tools/verify.sh` (as its argument), the tests | `Beyond Castle Wolfenstein (4am crack)/Beyond Castle Wolfenstein (4am crack).dsk` |
+| `CP2` | `tools/verify.sh`, `tools/cp2_check.py`, the cp2 tests | `apps/cp2/cp2` |
+| `A2TS_DIST` | `tools/bcw_up.sh` (the Apple2TS web build to serve) | `a2ts-web/dist` |
+| `A2TS_BRIDGE` | `tools/a2ts_ctl.mjs` (host:port of the bridge) | `127.0.0.1:8765` |
+
 ## What is in here
 
 | Path | Contents |

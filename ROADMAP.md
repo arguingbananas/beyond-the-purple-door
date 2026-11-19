@@ -15,4 +15,3 @@ A draft. Nothing here is promised; order is rough priority. Edit freely.
 - [ ] Script making a new emulator saved state through the menus (steps are documented in
       `tools/README-a2ts.md` but done by hand).
 - [ ] A fetch-and-extract script for the Apple2TS web build into `a2ts-web/`.
-- [ ] A bridge API reference listing every action and payload.
