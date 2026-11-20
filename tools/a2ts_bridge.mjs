@@ -64,10 +64,11 @@ const json = (res, o, code = 200) => {
 
 const MAX_WAIT = 10 * 60 * 1000;
 function sendCommand(action, payload = {}, timeoutMs = 120000) {
-  // caller-supplied: clamp it (an explicit comparison, which CodeQL recognizes as a bound)
-  timeoutMs = Number(timeoutMs) || 120000;
-  if (timeoutMs > MAX_WAIT) timeoutMs = MAX_WAIT;
-  if (timeoutMs < 1) timeoutMs = 1;
+  // caller-supplied: reject out-of-range values (CodeQL does not accept clamping as a bound)
+  timeoutMs = Number(timeoutMs ?? 120000);
+  if (!Number.isFinite(timeoutMs) || timeoutMs < 1 || timeoutMs > MAX_WAIT) {
+    return Promise.resolve({ ok: false, error: `timeoutMs must be between 1 and ${MAX_WAIT}` });
+  }
   const c = [...clients.values()][0];
   if (!c) return Promise.resolve({ ok: false, error: 'no emulator page connected' });
   const commandId = 'c' + nextId++;

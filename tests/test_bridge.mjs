@@ -96,6 +96,15 @@ test('malformed JSON is a 400, and the server keeps running', async () => {
   assert.equal((await fetch(`${base}/index.html`)).status, 200);
 });
 
+test('an out-of-range timeoutMs is refused', async () => {
+  for (const timeoutMs of [0, 600001, 'soon']) {
+    const body = JSON.stringify({ action: 'getStatus', timeoutMs });
+    const r = await (await fetch(`${base}/api/cmd`, { method: 'POST', body })).json();
+    assert.equal(r.ok, false);
+    assert.match(r.error, /timeoutMs must be between/);
+  }
+});
+
 test('a command with no emulator page connected is a clean error', async () => {
   const r = await (await fetch(`${base}/api/cmd`, { method: 'POST', body: '{"action":"getStatus"}' })).json();
   assert.equal(r.ok, false);
