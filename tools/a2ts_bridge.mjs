@@ -64,7 +64,10 @@ const json = (res, o, code = 200) => {
 
 const MAX_WAIT = 10 * 60 * 1000;
 function sendCommand(action, payload = {}, timeoutMs = 120000) {
-  timeoutMs = Math.min(Math.max(Number(timeoutMs) || 120000, 1), MAX_WAIT); // caller-supplied: clamp it
+  // caller-supplied: clamp it (an explicit comparison, which CodeQL recognizes as a bound)
+  timeoutMs = Number(timeoutMs) || 120000;
+  if (timeoutMs > MAX_WAIT) timeoutMs = MAX_WAIT;
+  if (timeoutMs < 1) timeoutMs = 1;
   const c = [...clients.values()][0];
   if (!c) return Promise.resolve({ ok: false, error: 'no emulator page connected' });
   const commandId = 'c' + nextId++;
