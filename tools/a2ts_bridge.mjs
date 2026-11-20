@@ -62,7 +62,9 @@ const json = (res, o, code = 200) => {
   res.end(JSON.stringify(o));
 };
 
+const MAX_WAIT = 10 * 60 * 1000;
 function sendCommand(action, payload = {}, timeoutMs = 120000) {
+  timeoutMs = Math.min(Math.max(Number(timeoutMs) || 120000, 1), MAX_WAIT); // caller-supplied: clamp it
   const c = [...clients.values()][0];
   if (!c) return Promise.resolve({ ok: false, error: 'no emulator page connected' });
   const commandId = 'c' + nextId++;
@@ -132,7 +134,8 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': MIME[path.extname(p).slice(1)] || 'application/octet-stream' });
     fs.createReadStream(p).pipe(res);
   } catch (e) {
-    if (!res.headersSent) json(res, { error: String(e) }, 400);
+    console.error(`bridge: ${req.method} ${url.pathname}: ${e.message}`); // details go to the log, not the client
+    if (!res.headersSent) json(res, { error: 'bad request' }, 400);
     else res.end();
   }
 });

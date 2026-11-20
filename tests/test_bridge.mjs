@@ -92,6 +92,7 @@ test("accepts the page's own Origin", async () => {
 test('malformed JSON is a 400, and the server keeps running', async () => {
   const r = await fetch(`${base}/api/cmd`, { method: 'POST', body: '{nope' });
   assert.equal(r.status, 400);
+  assert.deepEqual(await r.json(), { error: 'bad request' }); // no parser or stack details leak out
   assert.equal((await fetch(`${base}/index.html`)).status, 200);
 });
 

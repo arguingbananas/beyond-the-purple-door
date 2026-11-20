@@ -17,7 +17,7 @@ this project has actually used; the rest are listed from the source and untested
 
 | Endpoint | Purpose |
 |---|---|
-| `POST /api/cmd` `{action, payload, timeoutMs?}` | Send one action and wait for the reply. Returns `{ok: true, result}` or `{ok: false, error}`. Default wait 120 s. |
+| `POST /api/cmd` `{action, payload, timeoutMs?}` | Send one action and wait for the reply. Returns `{ok: true, result}` or `{ok: false, error}`. Default wait 120 s, at most 10 min. A bad request is a 400 `{error: "bad request"}`. |
 | `GET /api/state` | The last status the page posted (it sends one every 2 s and after each command). |
 | `/api/client/connect`, `/api/client/events`, `/api/client/state`, `/api/client/reply` | Used by the Apple2TS page itself (it connects back when loaded with `?remoteControl=1`). |
 | `GET /disks/game.dsk` | The `--disk` image, served read-only so the page can load it via `#game.dsk`. |

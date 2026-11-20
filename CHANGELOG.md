@@ -35,6 +35,8 @@ there are no tagged releases yet.
 - The bridge server rejects foreign `Host` and `Origin` headers, no longer serves sibling directories
   of the web build, and no longer crashes on malformed JSON. Chromium and its temporary profile are
   cleaned up when the bridge stops.
+- From CodeQL: the bridge clamps a caller's `timeoutMs` to 10 minutes and answers a bad request with
+  a fixed message (details go to its log, not the client).
 
 ## Earlier history (before this changelog)
 - Terminal-barrier patch (global collision change) and the local purple-door patch (room `$3C` only),
