@@ -38,13 +38,13 @@ safer choice for other images, but it carries no saved game.
 
 ## Starting the saved game
 
-At the demo screen:
+At the title screen ("PRESS RETURN TO BEGIN"; if the attract demo is
+running instead, press **Esc** first):
 
-1. Press **Esc** to stop the demo.
-2. Press **Return**.
-3. Press **K** (keyboard).
-4. Press **D** (resume a saved game).
-5. Press **Return**.
+1. Press **Return**.
+2. Press **K** (keyboard).
+3. Press **D** (resume a saved game) and wait until option D is highlighted.
+4. Press **Return**. Loading takes about 30 seconds.
 
 The game resumes with the player in the terminal room. Walk to the purple
 barrier. It is still drawn, but you can pass through. Outer walls, inner walls
@@ -104,6 +104,7 @@ individual fields were not decoded.
 - The IPS is only for the standard raw DOS-order 4am image.
 - The saved game contains whatever state the original run had. It was not
   built to be a clean "new game in the terminal room" state.
-- I tested the IPS-built image by comparing its bytes. I did not boot a disk
-  made by applying the IPS itself, although it is byte-identical to the v3
-  image that was tested.
+- The IPS-built image was boot-tested (2026-11-20): applied to the virgin
+  4am image, booted headless in Apple2TS, resumed with Return, K, D, Return,
+  and it arrived in room `$3C`. It is also byte-identical to the v3 image
+  that was played.

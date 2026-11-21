@@ -23,6 +23,9 @@ there are no tagged releases yet.
   `CONTRIBUTING.md`, `CLAUDE.md`, examples, GitHub Actions CI and Dependabot configuration.
 
 ### Changed
+- Boot-tested the images built from the IPS files: all three reach the title screen and the
+  saved-game image resumes into room `$3C`. Docs give the tested menu steps (Esc only if the attract
+  demo is running).
 - `tools/bcw_up.sh` checks that the saved state and web build exist before starting, and encodes the
   state path as proper JSON.
 - Repository reorganized into `patches/`, `docs/`, `reference/`, `tools/`, `tests/`.

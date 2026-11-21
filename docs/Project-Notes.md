@@ -59,10 +59,12 @@ IPS writes at absolute offsets, so apply it only to the standard image above.
 - when CiderPress II is installed, `tools/cp2_check.py` finds each rebuilt image's DOS filesystem
   the same as the original's (same notes, usage counts and files; `cp2 test` alone is not enough);
 - play-tested in Apple2TS: the player walks through the barrier, outer walls, inner walls and closets
-  block, and a guard also walks through. A disk booted from the IPS-built copy was never booted itself;
-  it is byte-identical to the image that was played.
+  block, and a guard also walks through;
+- boot-tested (2026-11-20, headless Apple2TS): all three images built from the crack with the IPS
+  files reach the title screen, and the saved-game image resumes into room `$3C`.
 
-To start the saved game at the demo screen: Esc, Return, K (keyboard), D (resume), Return. Play a copy;
+To start the saved game: at the title screen ("PRESS RETURN TO BEGIN") press Return, K (keyboard),
+D (resume), Return; if the attract demo is running, press Esc first. Play a copy;
 the game writes to its disk. If a guard catches the player the game ends and the in-memory save is lost.
 
 Background and headless emulator control: `tools/README-a2ts.md`.
@@ -71,12 +73,10 @@ Background and headless emulator control: `tools/README-a2ts.md`.
 
 - Whether anything else reads the `$40A0` record (guard logic, "door reappears" behaviour).
 - Which individual fields of the saved game differ in the experimental images; they were never decoded.
-- Whether the IPS-built image boots (see above).
 
 ## Ideas for next steps
 
 1. Hide the door graphic: poke the type byte at `$40A0` to a few values with the game paused, then find
    the drawing code. The pixels may also be in the room background.
 2. Player-only passage: guards use the same table, so this needs a separate player-collision lookup.
-3. Boot-test an image built purely from the IPS.
-4. Patches for `.woz`/`.nib` copies (currently DOS-order `.dsk` only).
+3. Patches for `.woz`/`.nib` copies (currently DOS-order `.dsk` only).

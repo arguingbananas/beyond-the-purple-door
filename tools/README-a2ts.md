@@ -39,7 +39,8 @@ Overrides (optional): `A2TS_DIST` points `bcw_up.sh` at another web build, and `
 ## Making a new state for a different disk (menus; verified by hand, not scripted)
 1. `node tools/a2ts_bridge.mjs --dist <dist> --disk <disk.dsk> --chromium &`  (disk loads and boots via `#game.dsk`)
 2. `waitScreen refs/title.png 90` (the attract demo loops; the title is only up briefly), then
-   `sendKeys '{"keys":"\r"}'`, `waitScreen refs/controls.png`, `sendKeys K`, `sendKeys D`,
+   `sendKeys '{"keys":"\r"}'`, `waitScreen refs/controls.png`, `sendKeys K`,
+   `waitScreen refs/options.png`, `sendKeys D` (a D sent before the options screen is lost),
    `waitScreen refs/resume-selected.png`.
 3. `runInputSequence '{"phases":[{"keys":"\r"}],"final":{"address":16464,"bytes":[60],"space":"main"},"timeoutMs":100000}'`
    (done when room byte `$4050` = `$3C`), then run ~6 s, pause (`-2`) so the guard cannot catch anyone.

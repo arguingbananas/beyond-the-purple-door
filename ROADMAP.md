@@ -8,7 +8,6 @@ A draft. Nothing here is promised; order is rough priority. Edit freely.
 - [ ] Player-only passage: guards currently walk through the door too, which needs a separate
       player-collision lookup.
 - [ ] Work out whether anything else reads the `$40A0` record (guard logic, "door reappears").
-- [ ] Boot-test an image built purely from the IPS files.
 - [ ] Patches for `.woz` and `.nib` copies (today only DOS-order `.dsk`).
 
 ## Tooling
