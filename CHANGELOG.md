@@ -12,6 +12,8 @@ there are no tagged releases yet.
   optional CiderPress II filesystem check (`tools/cp2_check.py`, skipped when `apps/cp2/cp2` is absent)
   that compares each rebuilt image with the original: same notes, usage counts and files. It does
   not rely on `cp2 test` alone, which reports "no failures" for a damaged DOS filesystem.
+- `docs/Third-Party.md`: every third-party program, tool and piece of content, with version,
+  license and link (licenses checked against each upstream at the version used).
 - `docs/Bridge-API.md`: every bridge action and payload, with the ones this project has verified.
 - Test suite (`tools/test.sh`): Python `unittest`, Node `node:test`, and the hash checks.
 - Lint and audit tooling: `tools/lint.sh`, `tools/audit.sh`, pinned dev dependencies.
@@ -35,6 +37,9 @@ there are no tagged releases yet.
 - The bridge server rejects foreign `Host` and `Origin` headers, no longer serves sibling directories
   of the web build, and no longer crashes on malformed JSON. Chromium and its temporary profile are
   cleaned up when the bridge stops.
+- The headless Chromium makes no outbound connections: host names other than `127.0.0.1` do not
+  resolve, and its background services are off. Before, its sign-in, time-check and model-download
+  services reached Google.
 - From CodeQL: the bridge refuses a `timeoutMs` outside 1 ms to 10 minutes and answers a bad request with
   a fixed message (details go to its log, not the client).
 

@@ -153,6 +153,14 @@ server.listen(port, '127.0.0.1', async () => {
       [
         '--headless=new',
         '--no-first-run',
+        // no calls home: Chromium's own services (sign-in, time check, model downloads) still reach
+        // Google with the --disable-* flags alone, so also resolve no host names at all. The page is
+        // served from 127.0.0.1 and needs nothing else.
+        '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1',
+        '--disable-background-networking',
+        '--disable-component-update',
+        '--disable-sync',
+        '--no-default-browser-check',
         `--user-data-dir=${prof}`,
         '--autoplay-policy=no-user-gesture-required',
         '--window-size=1100,800',

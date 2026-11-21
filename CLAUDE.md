@@ -27,6 +27,7 @@ Read `docs/Project-Notes.md` first; the README has setup.
 - Required: `README.md`, `LICENSE`, `.gitignore`, `requirements-dev.txt`, `package-lock.json`
 - Patchers import each other: keep `patches/apply_bcw_*.py` together; run them from `patches/`.
 - Scripts that read disk images: `python3 -I script.py args`.
+- When adding a dependency or tool, add it (version, license, link) to `docs/Third-Party.md`.
 
 ## Rules
 - Secrets and personal data never go in code, logs or commits.

@@ -9,7 +9,8 @@ curl -s 127.0.0.1:8765/api/cmd -d '{"action":"getStatus","payload":{}}'
 ```
 
 The actions are Apple2TS's own remote-control commands, read from its source
-(`src/ui/api/remotecontrol.ts` in Apple2TS 1.6.9, via the source maps in the release). They are not
+(`src/ui/api/remotecontrol.ts` in the Apple2TS 3.7.0 web build bundled with desktop app 1.6.9, via
+its source maps). They are not
 a documented, stable Apple2TS API and may change between versions. **Verified** marks the actions
 this project has actually used; the rest are listed from the source and untested here.
 

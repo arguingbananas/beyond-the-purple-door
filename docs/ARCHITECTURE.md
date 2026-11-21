@@ -31,6 +31,10 @@ unused padding after `@FHR` returns zero for that one cell in room `$3C`.
 - The bridge binds `127.0.0.1`, rejects foreign `Host` and `Origin` headers, and records its PID so
   `bcw_down.sh` stops exactly that process. Chromium runs in its own process group so the bridge can
   stop it and delete its temporary profile.
+- Nothing leaves the machine: Chromium is started with `--host-resolver-rules` that resolve no host
+  name except `127.0.0.1`, plus flags that turn off its background services. Without that, its own
+  services (account sign-in, a time check, model downloads) contact Google even in headless mode.
+  The Apple2TS page itself requests nothing external on load.
 - Emulator state, the web build and the game image are all gitignored; see `tools/README-a2ts.md`.
 - Every action and payload the bridge relays: `docs/Bridge-API.md`.
 

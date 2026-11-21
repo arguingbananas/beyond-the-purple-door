@@ -56,7 +56,8 @@ IPS writes at absolute offsets, so apply it only to the standard image above.
 
 - patcher output equals the IPS output for both patches (`3d843c2c...` local, `758ba06d...` terminal);
 - the saved-game IPS applied to the crack gives `ac664ef6...`;
-- CiderPress II `cp2 test` accepted that image (18 files, no failures);
+- when CiderPress II is installed, `tools/cp2_check.py` finds each rebuilt image's DOS filesystem
+  the same as the original's (same notes, usage counts and files; `cp2 test` alone is not enough);
 - play-tested in Apple2TS: the player walks through the barrier, outer walls, inner walls and closets
   block, and a guard also walks through. A disk booted from the IPS-built copy was never booted itself;
   it is byte-identical to the image that was played.

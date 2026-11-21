@@ -88,8 +88,14 @@ The screenshots in `reference/` and `tools/refs/` are frames from the game, incl
 room and to drive the emulator menus.
 
 The emulator tools use [Apple2TS](https://github.com/ct6502/apple2ts) by Chris Torrence (CT6502),
-which is MIT licensed. Its web build is downloaded separately and is not redistributed here.
+which is MIT licensed, running in [Chromium](https://www.chromium.org/) (BSD-3-Clause). Its web build
+is downloaded separately and is not redistributed here.
 
 The optional filesystem check uses [CiderPress II](https://github.com/fadden/CiderPress2) by Andy
 McFadden, whose source is Apache-2.0 licensed (its images and documentation are CC BY-SA 4.0). It is
 downloaded separately and is not redistributed here.
+
+The tools run on [Python](https://www.python.org/) (PSF-2.0) and [Node.js](https://nodejs.org/) (MIT);
+development uses ruff, pip-audit, ESLint, Prettier, ShellCheck, gitleaks, GitHub Actions and CodeQL.
+Every third-party piece, with its version, license and link, is listed in
+[`docs/Third-Party.md`](docs/Third-Party.md).

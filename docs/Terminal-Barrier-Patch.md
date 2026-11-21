@@ -34,10 +34,12 @@ files and matching the original code/data bytes. If it reports a mismatch, do
 not force the patch; the disk may be a different revision, already patched, or
 not a DOS-order `.dsk` image.
 
-**5.** Optionally validate the new image with CiderPress II:
+**5.** Optionally check the new image's DOS 3.3 filesystem with CiderPress II, compared with the
+original (from the repo root; `cp2 test` alone reports "no failures" even for a damaged filesystem):
 
 ```sh
-cp2 test "Beyond Castle Wolfenstein - Terminal Barrier Passable.dsk"
+python3 -I tools/cp2_check.py "Beyond Castle Wolfenstein (4am crack)/Beyond Castle Wolfenstein (4am crack).dsk" \
+  "Beyond Castle Wolfenstein - Terminal Barrier Passable.dsk"
 ```
 
 **6.** Boot the new image in an Apple II emulator. The patch does not create a
@@ -94,7 +96,9 @@ The reference unmodified disk used to build and validate this patch is
 `5898ae8fdd538aee3cc7d95158de403561e8f47eb5d9465989bcd47e0a75068d`).
 validation checked the original executable signatures and load addresses,
 applied the patch to a separate scratch image, confirmed the five logical
-edits, and ran CiderPress II's DOS filesystem test (18 files, no failures).
+edits, and checked the DOS filesystem with CiderPress II. `tools/verify.sh` now repeats that check
+with `tools/cp2_check.py`, which compares the patched image with the original (same notes, usage
+counts and files) instead of relying on `cp2 test` alone.
 
 The resumable room-$3C save in the play-test disk is a **separate, disk-specific
 save state**. This generic patcher does not manufacture or alter saved-game
