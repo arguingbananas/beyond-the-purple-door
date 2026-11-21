@@ -7,13 +7,12 @@ is not removed; it remains visible, but the patched game permits passage.
 
 ## Files
 
-- `apply_bcw_terminal_patch.py` — recommended patcher. It locates `@FHR`,
-  `CASTLE`, and `BACKUP` through the DOS catalog and T/S lists, checks the
-  expected original bytes, then writes a **new** disk image.
+- `apply_bcw_terminal_patch.py` — recommended patcher. It locates the game
+  executable `@FHR` through the DOS catalog and T/S lists, checks the expected
+  original bytes, then writes a **new** disk image.
 - `bcw-terminal-barrier.ips` — IPS patch for the standard raw DOS-order image
   layout used by the supplied 4am unprotected disk. Use the Python patcher for
   other DOS-order copies whose file sectors may have been allocated differently.
-- `Terminal-Barrier-Patch.pdf` — this document in PDF format.
 
 ## Applying the recommended patch
 
@@ -54,7 +53,7 @@ new filename. Do not apply the IPS file to a `.nib`, `.woz`, protected image,
 or a disk image with a different sector ordering. The IPS records use absolute
 raw-image offsets; the Python patcher is safer when file allocation differs.
 
-<h2 style="page-break-before: always;">What changes</h2>
+## What changes
 
 The game executable `@FHR` is a DOS binary loaded at `$0810`. Its DOS file
 starts with a four-byte binary load-address/length header, which is not part of
@@ -67,13 +66,12 @@ sectors.
 | `@FHR:$13C9-$13CB` | `4C 3B 15` | `EA EA EA` | NOPs the jump from the initial movement-map rejection into the collision response. |
 | `@FHR:$1524` | `16` | `00` | Changes the nearby `BCS` target from `$153B` to its fall-through at `$1525`. |
 | `@FHR:$1532` | `08` | `1E` | Changes the nearby `BNE` target from `$153B` to `$1551`, the accepted-movement path. |
-| `CASTLE:file+$1026` | `15` | `35` | Opens the native door cell in the room-15 map copy. |
-| `BACKUP:file+$1026` | `15` | `35` | Keeps the backup map's corresponding room-15 door open as well. |
 
-The first three edits are the collision bypass tested in the emulator. The two
-map edits preserve the separate room-15 door-open change present in the
-play-test disk; they are not what removes the terminal barrier's collision.
-The patch intentionally does not rewrite the terminal-room drawing data,
+These three edits (5 bytes) are the whole patch: the collision bypass tested in
+the emulator. Earlier versions also changed one byte in each of the `CASTLE`
+and `BACKUP` map files, opening a door in room 15. That edit came from
+mistaking that door for the purple one; it had nothing to do with the barrier
+and was removed (2026-11-20). The patch intentionally does not rewrite the terminal-room drawing data,
 erase the barrier graphic, edit a saved-game state, or clear other room maps.
 
 The collision changes apply to the movement checks used by the game, not only
@@ -94,9 +92,8 @@ The reference unmodified disk used to build and validate this patch is
 `Beyond Castle Wolfenstein (4am crack)/Beyond Castle Wolfenstein (4am crack).dsk`
 (SHA-256
 `5898ae8fdd538aee3cc7d95158de403561e8f47eb5d9465989bcd47e0a75068d`).
-validation checked the original executable signatures and load addresses,
-applied the patch to a separate scratch image, confirmed the five logical
-edits, and checked the DOS filesystem with CiderPress II. `tools/verify.sh` now repeats that check
+Validation checked the original executable signatures and load address,
+applied the patch to a separate scratch image, confirmed the three edits, and checked the DOS filesystem with CiderPress II. `tools/verify.sh` now repeats that check
 with `tools/cp2_check.py`, which compares the patched image with the original (same notes, usage
 counts and files) instead of relying on `cp2 test` alone.
 

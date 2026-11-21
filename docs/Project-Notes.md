@@ -46,7 +46,7 @@ must stay in one directory: the door patcher imports the terminal one.
 |---|---|---|
 | `bcw-purple-door-local.ips` | 28 | local patch only |
 | `bcw-purple-door-with-savegame.ips` | 409 | local patch plus a saved game in room `$3C` |
-| `bcw-terminal-barrier.ips` | 7 | global patch only |
+| `bcw-terminal-barrier.ips` | 5 | global patch only |
 
 IPS writes at absolute offsets, so apply it only to the standard image above.
 
@@ -54,7 +54,7 @@ IPS writes at absolute offsets, so apply it only to the standard image above.
 
 `tools/verify.sh` rebuilds everything from the 4am crack and checks hashes:
 
-- patcher output equals the IPS output for both patches (`3d843c2c...` local, `758ba06d...` terminal);
+- patcher output equals the IPS output for both patches (`3d843c2c...` local, `483ecb6c...` terminal);
 - the saved-game IPS applied to the crack gives `ac664ef6...`;
 - when CiderPress II is installed, `tools/cp2_check.py` finds each rebuilt image's DOS filesystem
   the same as the original's (same notes, usage counts and files; `cp2 test` alone is not enough);

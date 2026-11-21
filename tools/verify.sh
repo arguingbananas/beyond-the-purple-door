@@ -20,8 +20,8 @@ python3 -I "$here/tools/ips_apply.py" "$v" "$here/patches/bcw-terminal-barrier.i
 python3 -I "$here/tools/ips_apply.py" "$v" "$here/patches/bcw-purple-door-with-savegame.ips" "$tmp/ips_save.dsk"
 check "local patcher"    "$tmp/door.dsk"     3d843c2c
 check "local IPS"        "$tmp/ips_door.dsk" 3d843c2c
-check "terminal patcher" "$tmp/term.dsk"     758ba06d
-check "terminal IPS"     "$tmp/ips_term.dsk" 758ba06d
+check "terminal patcher" "$tmp/term.dsk"     483ecb6c
+check "terminal IPS"     "$tmp/ips_term.dsk" 483ecb6c
 check "savegame IPS"     "$tmp/ips_save.dsk" ac664ef6
 
 # Optional: CiderPress II checks that each rebuilt image is as sound a DOS 3.3 filesystem as the

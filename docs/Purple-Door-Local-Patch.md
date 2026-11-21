@@ -27,7 +27,6 @@ treated the same way, because the patch runs on every room load.
 - `bcw-purple-door-local.ips` — IPS patch for the standard raw DOS-order 4am
   image. It changes 28 bytes in three places. Use the Python patcher for other
   copies, whose files may sit in different sectors.
-- `Purple-Door-Local-Patch.pdf` — this document in PDF format.
 
 ## Applying the patch
 

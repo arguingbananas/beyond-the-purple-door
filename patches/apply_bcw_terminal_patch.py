@@ -17,8 +17,6 @@ PATCHES = (
     ("@FHR", 0x13C9 - 0x0810, bytes.fromhex("4c 3b 15"), bytes.fromhex("ea ea ea")),
     ("@FHR", 0x1524 - 0x0810, bytes.fromhex("16"), bytes.fromhex("00")),
     ("@FHR", 0x1532 - 0x0810, bytes.fromhex("08"), bytes.fromhex("1e")),
-    ("CASTLE", 0x1026, bytes.fromhex("15"), bytes.fromhex("35")),
-    ("BACKUP", 0x1026, bytes.fromhex("15"), bytes.fromhex("35")),
 )
 
 SIGNATURES = (
@@ -146,12 +144,12 @@ def patch_image(source: Path, destination: Path) -> None:
         )
 
     entries = file_entries(image)
-    required = ("@FHR", "CASTLE", "BACKUP")
+    required = ("@FHR",)
     missing = [name for name in required if name not in entries]
     if missing:
         raise PatchError(f"Required DOS files are missing: {', '.join(missing)}")
 
-    expected_load_addresses = {"@FHR": 0x0810, "CASTLE": 0x4304, "BACKUP": 0x4004}
+    expected_load_addresses = {"@FHR": 0x0810}
     for name, expected_load in expected_load_addresses.items():
         data_sectors = file_data_sectors(image, entries[name], name)
         first_data = read_sector(image, *data_sectors[0])
@@ -177,13 +175,8 @@ def patch_image(source: Path, destination: Path) -> None:
         position = binary_byte_offset(image, file_entry, name, logical_offset)
         actual = bytes(image[position : position + len(expected)])
         if actual != expected:
-            label = (
-                f"@{0x0810 + logical_offset:04X}"
-                if name == "@FHR"
-                else f"file offset ${logical_offset:04X}"
-            )
             raise PatchError(
-                f"{name} {label} has {actual.hex(' ').upper()}, expected "
+                f"{name} ${0x0810 + logical_offset:04X} has {actual.hex(' ').upper()}, expected "
                 f"{expected.hex(' ').upper()}; disk may be a different version "
                 "or already patched"
             )

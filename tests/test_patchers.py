@@ -20,7 +20,7 @@ import apply_bcw_terminal_patch as terminal  # noqa: E402
 CRACK_DIR = "Beyond Castle Wolfenstein (4am crack)"
 IMAGE = Path(os.environ.get("BCW_IMAGE") or ROOT / CRACK_DIR / f"{CRACK_DIR}.dsk")
 CRACK_SHA = "5898ae8f"
-DOOR_SHA, TERMINAL_SHA = "3d843c2c", "758ba06d"
+DOOR_SHA, TERMINAL_SHA = "3d843c2c", "483ecb6c"
 
 
 def sha(path: Path) -> str:

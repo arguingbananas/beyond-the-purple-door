@@ -23,6 +23,12 @@ there are no tagged releases yet.
   `CONTRIBUTING.md`, `CLAUDE.md`, examples, GitHub Actions CI and Dependabot configuration.
 
 ### Changed
+- **Terminal-barrier patch no longer opens a door in room 15.** Its two map edits (`CASTLE` and
+  `BACKUP` file offset `$1026`, `$15` to `$35`) came from mistaking that door for the purple one.
+  The patch is now the three collision edits in `@FHR` (5 bytes); the patched image hash changed
+  from `758ba06d...` to `483ecb6c...`. The local and saved-game patches never had this edit.
+- Removed the PDF copies of the patch docs: they were exported in October and had drifted from the
+  Markdown, which GitHub renders.
 - Boot-tested the images built from the IPS files: all three reach the title screen and the
   saved-game image resumes into room `$3C`. Docs give the tested menu steps (Esc only if the attract
   demo is running).

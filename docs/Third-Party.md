@@ -2,7 +2,7 @@
 
 Everything this project uses but did not write, with its license. **Nothing listed here is
 redistributed in this repo**: each piece is installed or downloaded separately. The IPS files in
-`patches/` hold only patch bytes (28, 7 and 511 bytes written), not the game.
+`patches/` hold only patch bytes (28, 5 and 511 bytes written), not the game.
 
 Licenses were taken from each upstream's license file at the version this project uses (checked
 2026-11-20), or from the installed package's metadata or copyright file for system and indirect
