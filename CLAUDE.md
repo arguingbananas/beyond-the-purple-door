@@ -39,6 +39,10 @@ Read `docs/Project-Notes.md` first; the README has setup.
   from other projects in the parent directory, and never run git commands against the parent.
 - Push only `main`. Claude Code may create local `refs/agents/*` checkpoint refs; they are not part
   of the project, so never push with `--all` or `--mirror`.
+- **Stop and warn loudly before anything ships a built artifact** (packaged binary, PyInstaller
+  build, wheel, release asset made by a build step). Python dev tools are deliberately not
+  hash-pinned because nothing built is distributed; shipping one changes that. See the
+  supply-chain section in `SECURITY.md`.
 
 ## Definition of done
 Sanity (`tools/verify.sh`) and full tests pass, `tools/lint.sh` is clean, `tools/audit.sh` shows no new
