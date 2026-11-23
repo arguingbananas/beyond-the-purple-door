@@ -22,6 +22,12 @@ there are no tagged releases yet.
 - README, LICENSE (MIT), `docs/Project-Notes.md`, `docs/ARCHITECTURE.md`, `ROADMAP.md`,
   `CONTRIBUTING.md`, `CLAUDE.md`, examples, GitHub Actions CI and Dependabot configuration.
 
+### Removed
+- **The global terminal-barrier patch** (`apply_bcw_terminal_patch.py`, `bcw-terminal-barrier.ips`,
+  `docs/Terminal-Barrier-Patch.md`): obsolete now that the local patch opens the purple door in room
+  `$3C` alone. Its DOS 3.3 catalog and sector helpers, which the local patcher used, moved to
+  `patches/dos33.py`. The patch remains in git history.
+
 ### Changed
 - **Terminal-barrier patch no longer opens a door in room 15.** Its two map edits (`CASTLE` and
   `BACKUP` file offset `$1026`, `$15` to `$35`) came from mistaking that door for the purple one.

@@ -1,10 +1,10 @@
 # Architecture
 
 ## Two halves
-1. **Patching** (`patches/`): pure Python. A patcher reads a DOS 3.3 disk image, finds the target
-   files through the catalog and track/sector lists, checks the original bytes, and writes a *new*
+1. **Patching** (`patches/`): pure Python. The patcher reads a DOS 3.3 disk image, finds the target
+   files through the catalog and track/sector lists (helpers in `dos33.py`), checks the original bytes, and writes a *new*
    image. IPS files are the same edits for the standard image at fixed offsets. `tools/verify.sh`
-   proves the patchers and the IPS files agree by hash.
+   proves the patcher and the IPS files agree by hash.
 2. **Emulator control** (`tools/a2ts_*`, `tools/bcw_*.sh`): Node and shell. Used to test patches in
    a running emulator without a window.
 

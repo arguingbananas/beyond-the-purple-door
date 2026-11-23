@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "patches"))
 import apply_bcw_purple_door_patch as door  # noqa: E402
-import apply_bcw_terminal_patch as terminal  # noqa: E402
 import cp2_check  # noqa: E402
+import dos33  # noqa: E402
 
 CRACK_DIR = "Beyond Castle Wolfenstein (4am crack)"
 IMAGE = Path(os.environ.get("BCW_IMAGE") or ROOT / CRACK_DIR / f"{CRACK_DIR}.dsk")
@@ -143,19 +143,16 @@ class RealCp2(unittest.TestCase):
         return path
 
     def ts_list_offset(self, data: bytearray) -> int:
-        track, sector = terminal.file_entries(data)["CASTLE"][:2]
-        return terminal.sector_offset(track, sector)
+        track, sector = dos33.file_entries(data)["CASTLE"][:2]
+        return dos33.sector_offset(track, sector)
 
     def test_reference_is_a_usable_baseline(self):
         self.assertEqual(cp2_check.problems_with_reference(self.ref), [])
 
-    def test_patched_images_are_as_sound_as_the_original(self):
-        door_img, term_img = self.tmp / "door.dsk", self.tmp / "term.dsk"
+    def test_patched_image_is_as_sound_as_the_original(self):
+        door_img = self.tmp / "door.dsk"
         door.patch_image(IMAGE, door_img)
-        terminal.patch_image(IMAGE, term_img)
-        for image in (door_img, term_img):
-            with self.subTest(image=image.name):
-                self.assertEqual(self.issues(image), [])
+        self.assertEqual(self.issues(door_img), [])
 
     def test_bad_track_sector_pointer_is_detected(self):
         def edit(data):
@@ -172,7 +169,7 @@ class RealCp2(unittest.TestCase):
 
     def test_damaged_catalog_is_detected(self):
         def edit(data):
-            start = terminal.sector_offset(*terminal.CATALOG_FIRST)
+            start = dos33.sector_offset(*dos33.CATALOG_FIRST)
             data[start + 11] = 99  # first catalog entry's track/sector list pointer
 
         self.assertTrue(self.issues(self.damaged("badcat", edit)))

@@ -13,7 +13,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from apply_bcw_terminal_patch import (
+from dos33 import (
     IMAGE_SIZE,
     SECTOR_SIZE,
     PatchError,

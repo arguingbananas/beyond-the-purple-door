@@ -13,7 +13,7 @@ SHA-256 starting `5898ae8f`). The game image is not in this repo; supply your ow
 | Approach | Scope | Result |
 |---|---|---|
 | **Local patch** (preferred) | Only room `$3C`, only the purple-door record | Player walks through. Walls and closets still block. **Guards walk through it too.** |
-| Global terminal-barrier patch | Shared player collision code | Player walks through the door and probably other map walls. |
+| Global terminal-barrier patch (removed 2026-11-22) | Shared player collision code | Player walked through the door and probably other map walls. Obsolete once the local patch worked; still in git history. |
 
 Not done: hiding the door graphic (`docs/Hide-Purple-Door-Notes.md`, untested guesses) and making the
 door passable for the player only.
@@ -38,29 +38,28 @@ Details are in `docs/Purple-Door-Local-Patch.md`. In short:
 
 ## The patches
 
-`patches/` holds Python patchers (standard library only; they locate files through the DOS catalog and
-refuse to patch unless the original bytes match) and IPS files for the standard image. The two patchers
-must stay in one directory: the door patcher imports the terminal one.
+`patches/` holds a Python patcher (standard library only; it locates files through the DOS catalog and
+refuses to patch unless the original bytes match) and IPS files for the standard image. The patcher
+imports `dos33.py` (catalog and sector helpers), so keep the two files in one directory.
 
 | File | Disk bytes changed | Contents |
 |---|---|---|
 | `bcw-purple-door-local.ips` | 28 | local patch only |
 | `bcw-purple-door-with-savegame.ips` | 409 | local patch plus a saved game in room `$3C` |
-| `bcw-terminal-barrier.ips` | 5 | global patch only |
 
-IPS writes at absolute offsets, so apply it only to the standard image above.
+IPS writes at absolute offsets, so apply them only to the standard image above.
 
 ## Verification
 
 `tools/verify.sh` rebuilds everything from the 4am crack and checks hashes:
 
-- patcher output equals the IPS output for both patches (`3d843c2c...` local, `483ecb6c...` terminal);
+- the patcher output equals the local IPS output (`3d843c2c...`);
 - the saved-game IPS applied to the crack gives `ac664ef6...`;
 - when CiderPress II is installed, `tools/cp2_check.py` finds each rebuilt image's DOS filesystem
   the same as the original's (same notes, usage counts and files; `cp2 test` alone is not enough);
 - play-tested in Apple2TS: the player walks through the barrier, outer walls, inner walls and closets
   block, and a guard also walks through;
-- boot-tested (2026-11-20, headless Apple2TS): all three images built from the crack with the IPS
+- boot-tested (2026-11-20, headless Apple2TS): the images built from the crack with the IPS
   files reach the title screen, and the saved-game image resumes into room `$3C`.
 
 To start the saved game: at the title screen ("PRESS RETURN TO BEGIN") press Return, K (keyboard),

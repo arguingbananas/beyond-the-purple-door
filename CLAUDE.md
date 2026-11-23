@@ -25,7 +25,7 @@ Read `docs/Project-Notes.md` first; the README has setup.
 
 ## Files
 - Required: `README.md`, `LICENSE`, `.gitignore`, `requirements-dev.txt`, `package-lock.json`
-- Patchers import each other: keep `patches/apply_bcw_*.py` together; run them from `patches/`.
+- The patcher imports `patches/dos33.py`: keep them together; run it from `patches/`.
 - Scripts that read disk images: `python3 -I script.py args`.
 - When adding a dependency or tool, add it (version, license, link) to `docs/Third-Party.md`.
 

@@ -6,8 +6,8 @@ room `$3C`, the cabinet room, passable. The barrier is still drawn, but the
 player can walk through it. No other collision check is changed: outer walls,
 inner walls and the green closets still block movement.
 
-Unlike the earlier *Terminal Barrier* patch, which changes shared player
-collision code and affects every object, this patch changes data for one door
+Unlike an earlier global patch (since removed), which changed shared player
+collision code and affected every object, this patch changes data for one door
 in one room.
 
 ## Known side effect
@@ -23,7 +23,7 @@ treated the same way, because the patch runs on every room load.
 - `apply_bcw_purple_door_patch.py` — recommended patcher. It finds `@FHR` and
   `^THINGS` through the DOS catalog and T/S lists, checks the original bytes,
   and writes a **new** image. It imports helpers from
-  `apply_bcw_terminal_patch.py`, so keep both files in the same directory.
+  `dos33.py`, so keep both files in the same directory.
 - `bcw-purple-door-local.ips` — IPS patch for the standard raw DOS-order 4am
   image. It changes 28 bytes in three places. Use the Python patcher for other
   copies, whose files may sit in different sectors.

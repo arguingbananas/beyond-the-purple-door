@@ -59,7 +59,7 @@ Nothing needs to be set; these only override the defaults.
 
 | Path | Contents |
 |---|---|
-| `patches/` | Python patchers and IPS files. The two patchers import each other, so keep them together. |
+| `patches/` | The Python patcher, its `dos33.py` helpers (keep them together) and IPS files. |
 | `docs/` | How the door is made solid, what each patch changes, project notes, untried ideas. |
 | `tools/` | `verify.sh`, `test.sh`, `ips_apply.py`, and the headless emulator scripts. |
 | `tests/` | Unit tests (`unittest` and `node:test`). Tests that need the game image skip without it. |
@@ -67,9 +67,8 @@ Nothing needs to be set; these only override the defaults.
 | `reference/` | Screenshots of the room. |
 | `apps/`, `a2ts-web/` | Local only and gitignored: the Apple2TS AppImage, its web build and saved emulator states. |
 
-Start with [`docs/Project-Notes.md`](docs/Project-Notes.md); [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) explains how the pieces fit, and [`ROADMAP.md`](ROADMAP.md) lists what is next. The local patch is the preferred one: it
-affects only room `$3C`, but guards can walk through the door too. The global terminal-barrier patch
-changes shared collision code and probably opens other walls.
+Start with [`docs/Project-Notes.md`](docs/Project-Notes.md); [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) explains how the pieces fit, and [`ROADMAP.md`](ROADMAP.md) lists what is next. The local patch affects only room `$3C`,
+but guards can walk through the door too.
 
 ## Contributing
 

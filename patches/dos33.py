@@ -1,31 +1,12 @@
-#!/usr/bin/env python3
-"""Apply the terminal-barrier collision patch to an unprotected DOS-order disk."""
+"""DOS 3.3 disk-image helpers used by the patchers: catalog lookup and file byte offsets."""
 
 from __future__ import annotations
-
-import argparse
-import sys
-from pathlib import Path
 
 IMAGE_SIZE = 35 * 16 * 256
 SECTOR_SIZE = 256
 SECTORS_PER_TRACK = 16
 VTOC = (17, 0)
 CATALOG_FIRST = (17, 15)
-
-PATCHES = (
-    ("@FHR", 0x13C9 - 0x0810, bytes.fromhex("4c 3b 15"), bytes.fromhex("ea ea ea")),
-    ("@FHR", 0x1524 - 0x0810, bytes.fromhex("16"), bytes.fromhex("00")),
-    ("@FHR", 0x1532 - 0x0810, bytes.fromhex("08"), bytes.fromhex("1e")),
-)
-
-SIGNATURES = (
-    ("@FHR", 0x13C9 - 0x0810, bytes.fromhex("4c 3b 15")),
-    ("@FHR", 0x1523 - 0x0810, bytes.fromhex("b0 16")),
-    ("@FHR", 0x1531 - 0x0810, bytes.fromhex("d0 08")),
-    ("@FHR", 0x153B - 0x0810, bytes.fromhex("ad 43 43")),
-    ("@FHR", 0x1551 - 0x0810, bytes.fromhex("8e 43 43")),
-)
 
 
 class PatchError(Exception):
@@ -132,79 +113,3 @@ def binary_byte_offset(
         raise PatchError(f"Offset ${logical_offset:X} is outside {name}")
     track, sector = data_sectors[sector_index]
     return sector_offset(track, sector) + offset_in_sector
-
-
-def patch_image(source: Path, destination: Path) -> None:
-    if destination.exists():
-        raise PatchError(f"Refusing to overwrite existing output: {destination}")
-    image = bytearray(source.read_bytes())
-    if len(image) != IMAGE_SIZE:
-        raise PatchError(
-            f"Expected a 143,360-byte, 35-track DOS-order .dsk image; found {len(image)} bytes"
-        )
-
-    entries = file_entries(image)
-    required = ("@FHR",)
-    missing = [name for name in required if name not in entries]
-    if missing:
-        raise PatchError(f"Required DOS files are missing: {', '.join(missing)}")
-
-    expected_load_addresses = {"@FHR": 0x0810}
-    for name, expected_load in expected_load_addresses.items():
-        data_sectors = file_data_sectors(image, entries[name], name)
-        first_data = read_sector(image, *data_sectors[0])
-        load_address = int.from_bytes(first_data[:2], "little")
-        if load_address != expected_load:
-            raise PatchError(
-                f"Unexpected {name} load address ${load_address:04X}; expected ${expected_load:04X}"
-            )
-
-    for name, logical_offset, expected in SIGNATURES:
-        position = binary_byte_offset(image, entries[name], name, logical_offset)
-        actual = bytes(image[position : position + len(expected)])
-        if actual != expected:
-            raise PatchError(
-                f"{name} code signature at "
-                f"${0x0810 + logical_offset:04X} is {actual.hex(' ').upper()}, "
-                f"expected {expected.hex(' ').upper()}; disk may be a different "
-                "version or already patched"
-            )
-
-    for name, logical_offset, expected, replacement in PATCHES:
-        file_entry = entries[name]
-        position = binary_byte_offset(image, file_entry, name, logical_offset)
-        actual = bytes(image[position : position + len(expected)])
-        if actual != expected:
-            raise PatchError(
-                f"{name} ${0x0810 + logical_offset:04X} has {actual.hex(' ').upper()}, expected "
-                f"{expected.hex(' ').upper()}; disk may be a different version "
-                "or already patched"
-            )
-        image[position : position + len(replacement)] = replacement
-
-    destination.write_bytes(image)
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(
-        description=(
-            "Patch an unprotected DOS-order Beyond Castle Wolfenstein disk to "
-            "allow passage through the terminal-room barrier."
-        )
-    )
-    parser.add_argument("input_disk", type=Path, help="unmodified input .dsk image")
-    parser.add_argument("output_disk", type=Path, help="new patched .dsk image")
-    args = parser.parse_args()
-
-    try:
-        patch_image(args.input_disk, args.output_disk)
-    except (OSError, PatchError) as error:
-        print(f"error: {error}", file=sys.stderr)
-        return 1
-    print(f"Patched disk written to {args.output_disk}")
-    print("The input image was not modified.")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
