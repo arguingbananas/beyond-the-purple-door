@@ -41,14 +41,21 @@ Details are in `docs/Purple-Door-Local-Patch.md`. In short:
 Read from the room data with the game paused in room `$3C`, and from the game's text on the disk
 (2026-11-22):
 
-- **The figure behind the purple door is an ordinary guard.** It is not in the room's object list;
-  it is an actor run by the same code as every other guard. The "HEIL !" shown on entering is the
-  first line of the guards' speech table ("HEIL ! / YOUR PASS ! / COME HERE ! / STOP ! / NO ! /
-  ALERT !"), and once the door is opened the guard walks through it like any other.
-- **The seated cabinet is scenery.** The object list holds only the conference table (type `$50`),
-  the purple door (`$60`), two green closets (`$20`) and one record not yet identified (`$10`). The
-  table's collision cells (`$90` at `$4228-$422D` and `$4230-$4235`, two rows of six) cover the table
-  and the seated figures: drawn and solid, otherwise inert.
+- **The guard is an ordinary guard, kept in the room's object list as type `$10`.** In the saved
+  cabinet-room state the guard stands left of the purple door and the player right of it. The `$10`
+  record (`$4080`) belongs to the guard: left running with no input, it walks to the door (its cell
+  goes from `$3C` to `$3D`, its position byte from `$18` to `$1C`, and its two collision cells
+  `$423C/$4244` move to `$423D/$4245`) and catches the player ("THEY GOT YOU !"); with its type byte
+  set to `$00` the guard stands still. The "HEIL !" shown on entering is the first line of the guards'
+  speech table ("HEIL ! / YOUR PASS ! / COME HERE ! / STOP ! / NO ! / ALERT !").
+- **The player is not in the object list.** In the first room of a new game (room `1`, "same
+  bunker") the object list and the collision table are empty while the player stands on screen.
+- **The seated cabinet is scenery.** Besides the guard, the object list holds only the conference
+  table (type `$50`), the purple door (`$60`) and two green closets (`$20`). The table's collision
+  cells (`$90` at `$4228-$422D` and `$4230-$4235`, two rows of six) cover the table and the seated
+  figures: drawn and solid, otherwise inert.
+- **Playing the saved game:** the guard is already walking toward the door when the game resumes and,
+  with the door passable, reaches the player within a few seconds. Move away at once.
 - **Hitler is never drawn.** He appears only in item names ("HITLER'S DIARY") and in the ending
   telegrams: success reads "HITLER AND MOST OF CABINET DEAD", the partial failure "MAJOR EXPLOSION IN
   THE FUEHRERBUNKER ... FUEHRER ESCAPED UNHARMED ... TRY AGAIN". The working assumption is that the
@@ -91,8 +98,8 @@ Background and headless emulator control: `tools/README-a2ts.md`.
 
 - Whether anything else reads the `$40A0` record (guard logic, "door reappears" behaviour).
 - Which individual fields of the saved game differ in the experimental images; they were never decoded.
-- What decides between the two ending telegrams (where the bomb goes off, when, or both), and what
-  the `$10` object record in room `$3C` is.
+- What decides between the two ending telegrams (where the bomb goes off, when, or both).
+- Where the player's own position is kept (it is not in the room's object list).
 
 ## Ideas for next steps
 
