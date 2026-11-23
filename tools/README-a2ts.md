@@ -5,8 +5,17 @@ through its built-in remote-control bridge (`?remoteControl=1`, see `src/ui/api/
 the AppImage's source maps).
 
 ## One-time setup (gitignored folders at the repo root; nothing here is committed)
-- `apps/Apple2TS.AppImage`: the Apple2TS desktop release, downloaded from the Apple2TS project.
-  It is only used as the source of the web build below.
+- `apps/Apple2TS.AppImage`: the Apple2TS desktop app **v1.6.9**. Download `Apple2TS.AppImage` from
+  the [v1.6.9 release](https://github.com/ct6502/apple2ts-app/releases/tag/v1.6.9) and check that its
+  SHA-256 equals the digest GitHub shows for that asset
+  (`52f5eb415b12dbebf694dcd97999d0ef152ff2b51c42e84d8b1fb3e984aa3f26`). Do not use v1.7.1: its
+  AppImage ships the web source instead of the built `apple2ts-dist/dist/` and hangs on the splash
+  screen. It is the source of the web build below, and of a window for playing by hand.
+- **The AppImage updates itself when launched** (it downloads the latest release and replaces its
+  own file). Never run it directly. Extract it once into `apps/Apple2TS-1.6.9/` (run
+  `../Apple2TS.AppImage --appimage-extract` inside that folder) and play with
+  `apps/Apple2TS-1.6.9/squashfs-root/AppRun <copy.dsk>`; started that way the updater finds no
+  AppImage and does nothing. The game writes to its disk, so play a copy.
 - `apps/cp2/` (optional): [CiderPress II](https://github.com/fadden/CiderPress2) v1.2.0, used by
   `tools/verify.sh` to check each rebuilt image. Download `cp2_1.2.0_linux-x64_sc.zip` from its
   GitHub release, check that its SHA-256 equals the digest GitHub shows for that asset

@@ -4,9 +4,11 @@ Patches and tools that make the purple door in room `$3C` passable, plus headles
 Read `docs/Project-Notes.md` first; the README has setup.
 
 ## Environment
-- Python 3.12 (stdlib only), Node 22+ (tested on 24), shellcheck. Emulator tools also need Chromium
-  and an Apple2TS web build in `a2ts-web/`, extracted from `apps/Apple2TS.AppImage`
-  (see `tools/README-a2ts.md`). `apps/` and `a2ts-web/` are gitignored. Optional: CiderPress II in
+- Python 3.12 (stdlib only), Node 24+, shellcheck. Emulator tools also need Chromium
+  and an Apple2TS web build in `a2ts-web/`, extracted from `apps/Apple2TS.AppImage` (desktop app
+  pinned to v1.6.9, see `tools/README-a2ts.md`). Never run the AppImage directly: it replaces itself
+  with the latest release. Run the extracted `apps/Apple2TS-1.6.9/squashfs-root/AppRun` instead.
+  `apps/` and `a2ts-web/` are gitignored. Optional: CiderPress II in
   `apps/cp2/` for the filesystem check in `tools/verify.sh` (`cp2 test` alone reports "no failures" for a
   damaged DOS filesystem, so use `tools/cp2_check.py`, which compares against the original image).
 - The game image is not in this repo and must never be committed. Work on copies; never modify the
@@ -39,6 +41,8 @@ Read `docs/Project-Notes.md` first; the README has setup.
   from other projects in the parent directory, and never run git commands against the parent.
 - Push only `main`. Claude Code may create local `refs/agents/*` checkpoint refs; they are not part
   of the project, so never push with `--all` or `--mirror`.
+- End-of-support dates and the upgrade steps are in the README ("End of support"); check them when
+  touching runtime versions.
 - **Stop and warn loudly before anything ships a built artifact** (packaged binary, PyInstaller
   build, wheel, release asset made by a build step). Python dev tools are deliberately not
   hash-pinned because nothing built is distributed; shipping one changes that. See the

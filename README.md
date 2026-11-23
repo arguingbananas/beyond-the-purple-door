@@ -20,11 +20,17 @@ game: a raw DOS-order, 143,360-byte, 35-track `.dsk` with SHA-256 starting `5898
 
 ## Quick start
 
-Requirements: Python 3.12 (standard library only), Node 22 or newer (tested on 24), and `shellcheck`.
+Requirements: Python 3.12 (standard library only), Node 24 or newer, and `shellcheck`.
 Chromium and an Apple2TS web build are needed only for the emulator tools (see
 [`tools/README-a2ts.md`](tools/README-a2ts.md)). [CiderPress II](https://ciderpress2.com/) is
 optional: if `apps/cp2/cp2` exists, `tools/verify.sh` also checks each rebuilt image's DOS 3.3
 filesystem with it.
+
+End of support (from [endoflife.date](https://endoflife.date/), checked 2026-11-22): Node 24 on
+2028-04-30, Python 3.12 on 2028-10-31, and the CI runner image (Ubuntu 24.04) on 2029-05-31. Before
+a date passes, move to the next supported release: update the version here, in `CLAUDE.md`,
+`CONTRIBUTING.md`, `docs/Third-Party.md`, `package.json` (`engines`), `pyproject.toml`
+(`target-version`) and `.github/workflows/ci.yml`, then run `tools/test.sh` and `tools/lint.sh`.
 
 ```sh
 tools/verify.sh                      # rebuild every patched image from your game image and check hashes (~1 s)
@@ -54,6 +60,7 @@ Nothing needs to be set; these only override the defaults.
 | `CP2` | `tools/verify.sh`, `tools/cp2_check.py`, the cp2 tests | `apps/cp2/cp2` |
 | `A2TS_DIST` | `tools/bcw_up.sh` (the Apple2TS web build to serve) | `a2ts-web/dist` |
 | `A2TS_BRIDGE` | `tools/a2ts_ctl.mjs` (host:port of the bridge) | `127.0.0.1:8765` |
+| `TMPDIR` | `tools/bcw_up.sh`, `tools/bcw_down.sh` (where the bridge's PID file and log go) | `/tmp` |
 
 ## What is in here
 

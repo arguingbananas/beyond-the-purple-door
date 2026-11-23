@@ -9,3 +9,16 @@ a2ts-web/
 .venv/
 node_modules/
 CLAUDE.local.md
+# local secrets and keys
+.env
+.env.*
+*.pem
+*.key
+# emulator saved states (contain the game disk)
+*.a2ts
+# editors and OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store

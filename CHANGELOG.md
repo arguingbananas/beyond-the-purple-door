@@ -6,6 +6,9 @@ there are no tagged releases yet.
 ## Unreleased
 
 ### Added
+- `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1), issue and pull request templates.
+- End-of-support dates for Node, Python and the CI image, and the steps to move on, in the README.
+- `SECURITY.md` says what the project does not defend against.
 - Headless Apple2TS control through its built-in remote-control bridge: `tools/a2ts_bridge.mjs`,
   `tools/a2ts_ctl.mjs`, `tools/bcw_up.sh`, `tools/bcw_down.sh` (see `tools/README-a2ts.md`).
 - `tools/verify.sh` and `tools/ips_apply.py` to rebuild patched images and check hashes, plus an
@@ -29,6 +32,11 @@ there are no tagged releases yet.
   `patches/dos33.py`. The patch remains in git history.
 
 ### Changed
+- **Node 24 or newer is now required** (was 22+; Node 22 reaches end of life on 2027-04-30).
+- The Apple2TS desktop app is pinned to v1.6.9 with its SHA-256 in `tools/README-a2ts.md`: v1.7.1
+  is broken, and the AppImage replaces itself with the latest release when launched, so it is run
+  from an extracted copy.
+- `.gitignore` also covers `.env`, key files, saved states (`*.a2ts`) and editor files.
 - **Terminal-barrier patch no longer opens a door in room 15.** Its two map edits (`CASTLE` and
   `BACKUP` file offset `$1026`, `$15` to `$35`) came from mistaking that door for the purple one.
   The patch is now the three collision edits in `@FHR` (5 bytes); the patched image hash changed

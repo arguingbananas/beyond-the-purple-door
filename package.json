@@ -4,7 +4,7 @@
   "description": "Dev tooling for the Beyond Castle Wolfenstein purple-door project (the tools themselves have no runtime dependencies)",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "scripts": {
     "test": "node --test tests/*.mjs",
