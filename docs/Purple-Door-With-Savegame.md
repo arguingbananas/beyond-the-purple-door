@@ -5,12 +5,12 @@ into a disk that:
 
 1. contains the purple door patch described in `Purple-Door-Local-Patch.md`,
    and
-2. holds a **saved game with the player in the terminal room (room `$3C`)**,
+2. holds a **saved game with the player in the cabinet room (room `$3C`)**,
    so you can test the door without playing through the castle first.
 
 The plain `bcw-purple-door-local.ips` contains only the patch (28 bytes). This
 file adds the saved-game data and is the one to use when you want to start in
-the terminal room.
+the cabinet room.
 
 ## Size
 
@@ -46,7 +46,7 @@ running instead, press **Esc** first):
 3. Press **D** (resume a saved game) and wait until option D is highlighted.
 4. Press **Return**. Loading takes about 30 seconds.
 
-The game resumes with the player in the terminal room. Walk to the purple
+The game resumes with the player in the cabinet room. Walk to the purple
 barrier. It is still drawn, but you can pass through. Outer walls, inner walls
 and the green closets (they are closets, not doors) still block you.
 
@@ -103,7 +103,7 @@ individual fields were not decoded.
 - Only room `$3C` is affected by the patch.
 - The IPS is only for the standard raw DOS-order 4am image.
 - The saved game contains whatever state the original run had. It was not
-  built to be a clean "new game in the terminal room" state.
+  built to be a clean "new game in the cabinet room" state.
 - The IPS-built image was boot-tested (2026-11-20): applied to the virgin
   4am image, booted headless in Apple2TS, resumed with Return, K, D, Return,
   and it arrived in room `$3C`. It is also byte-identical to the v3 image

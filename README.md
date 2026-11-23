@@ -1,6 +1,6 @@
 # Beyond Castle Wolfenstein: purple door
 
-Patches and tools for making the purple door in the terminal room of *Beyond Castle Wolfenstein*
+Patches and tools for making the purple door in the cabinet room of *Beyond Castle Wolfenstein*
 (Muse Software, 1984, Apple II, DOS 3.3) passable, plus a way to drive the Apple2TS emulator in the
 background to test them.
 

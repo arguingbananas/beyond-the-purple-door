@@ -1,6 +1,6 @@
 # Project notes: the purple door in Beyond Castle Wolfenstein
 
-Goal: let the player walk through the purple door (a purple barrier) in the terminal/cabinet room of
+Goal: let the player walk through the purple door (a purple barrier) in the cabinet room of
 *Beyond Castle Wolfenstein* (Muse, 1984, Apple II, DOS 3.3). The room is `$3C` in the game's own
 numbering. `reference/objective-circled.png` shows it: the player circled green, the purple door boxed
 red at the lower right, a guard on the far side.
