@@ -36,6 +36,25 @@ Details are in `docs/Purple-Door-Local-Patch.md`. In short:
 - Confirmed live: writing `$00` to `$423D` and `$4245` in the running game makes the barrier walkable,
   and a write watchpoint on `$423D` leads to the writer at `$5D33`.
 
+## Who is in room `$3C`
+
+Read from the room data with the game paused in room `$3C`, and from the game's text on the disk
+(2026-11-22):
+
+- **The figure behind the purple door is an ordinary guard.** It is not in the room's object list;
+  it is an actor run by the same code as every other guard. The "HEIL !" shown on entering is the
+  first line of the guards' speech table ("HEIL ! / YOUR PASS ! / COME HERE ! / STOP ! / NO ! /
+  ALERT !"), and once the door is opened the guard walks through it like any other.
+- **The seated cabinet is scenery.** The object list holds only the conference table (type `$50`),
+  the purple door (`$60`), two green closets (`$20`) and one record not yet identified (`$10`). The
+  table's collision cells (`$90` at `$4228-$422D` and `$4230-$4235`, two rows of six) cover the table
+  and the seated figures: drawn and solid, otherwise inert.
+- **Hitler is never drawn.** He appears only in item names ("HITLER'S DIARY") and in the ending
+  telegrams: success reads "HITLER AND MOST OF CABINET DEAD", the partial failure "MAJOR EXPLOSION IN
+  THE FUEHRERBUNKER ... FUEHRER ESCAPED UNHARMED ... TRY AGAIN". The working assumption is that the
+  bomb going off in the cabinet room is a success and anywhere else is the partial failure; the code
+  that picks the telegram has not been traced yet.
+
 ## The patches
 
 `patches/` holds a Python patcher (standard library only; it locates files through the DOS catalog and
@@ -72,6 +91,8 @@ Background and headless emulator control: `tools/README-a2ts.md`.
 
 - Whether anything else reads the `$40A0` record (guard logic, "door reappears" behaviour).
 - Which individual fields of the saved game differ in the experimental images; they were never decoded.
+- What decides between the two ending telegrams (where the bomb goes off, when, or both), and what
+  the `$10` object record in room `$3C` is.
 
 ## Ideas for next steps
 
