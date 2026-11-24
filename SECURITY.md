@@ -22,6 +22,14 @@ rather than opening a public issue. This is a one-person hobby project, so repli
 effort. Fixes are made on `main` (there are no release branches), and the advisory is
 published once a fix is in.
 
+## Repository protections
+
+- `main` cannot be deleted or force-pushed (ruleset `protectforce`, no bypass).
+- Pull requests into `main` need the CI checks to pass (ruleset `require-ci`; the maintainer can
+  push directly).
+- Workflows from pull requests by any outside contributor wait for the maintainer's approval.
+- Secret scanning with push protection, Dependabot alerts and security updates, and CodeQL are on.
+
 ## Supply-chain decisions
 
 - **Python dev tools are pinned exactly (`==`) but not hash-pinned** (decided 2026-11-20). They only

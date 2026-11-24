@@ -6,6 +6,12 @@ there are no tagged releases yet.
 ## Unreleased
 
 ### Added
+- `SECURITY.md` lists the repository protections: no deletion or force push of `main`, CI
+  required for pull requests, approval for all outside contributors' workflows.
+- The Node scripts (`tools/a2ts_bridge.mjs`, `tools/a2ts_ctl.mjs`) refuse Node older than 24 with a
+  clear message; the README lists Linux and bash 5+; `tests/test_min_versions.py` (renamed from
+  `test_min_python.py`) now also keeps the Node minimum consistent.
+- `tools/lint.sh` also checks `.githooks/pre-commit` and says how to install shellcheck if missing.
 - Python 3.11 is now the enforced minimum: the scripts and `tools/test.sh`/`tools/verify.sh` exit
   with a clear message on older versions, ruff targets 3.11, and CI tests 3.11, 3.12 and 3.15.
 - A note at the top of the README that the project was made with AI: GitHub Copilot for the first

@@ -14,6 +14,12 @@ import path from 'path';
 import os from 'os';
 import { spawn } from 'child_process';
 
+// Minimum Node, kept in step with package.json "engines" (tests/test_min_versions.py checks this).
+if (Number(process.versions.node.split('.')[0]) < 24) {
+  console.error(`a2ts_bridge.mjs: needs Node 24 or newer (this is ${process.versions.node})`);
+  process.exit(1);
+}
+
 const arg = (n, d) => {
   const i = process.argv.indexOf('--' + n);
   return i < 0 ? d : process.argv[i + 1]?.startsWith('--') || i + 1 >= process.argv.length ? true : process.argv[i + 1];

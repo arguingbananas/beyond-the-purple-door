@@ -1,5 +1,11 @@
 // usage: node a2ts_ctl.mjs <action> ['{"json":"payload"}'] [--png out.png]   (talks to a2ts_bridge.mjs, A2TS_BRIDGE=host:port)
 import fs from 'fs';
+
+// Minimum Node, kept in step with package.json "engines" (tests/test_min_versions.py checks this).
+if (Number(process.versions.node.split('.')[0]) < 24) {
+  console.error(`a2ts_ctl.mjs: needs Node 24 or newer (this is ${process.versions.node})`);
+  process.exit(1);
+}
 const [action, payloadArg, flag, out] = process.argv.slice(2);
 const bridge = `http://${process.env.A2TS_BRIDGE || '127.0.0.1:8765'}/api/cmd`;
 const call = async (a, p = {}, t = 60000) =>

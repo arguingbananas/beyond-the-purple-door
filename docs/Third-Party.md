@@ -1,8 +1,10 @@
 # Third-party software and content
 
-Everything this project uses but did not write, with its license. **Nothing listed here is
-redistributed in this repo**: each piece is installed or downloaded separately. The IPS files in
-`patches/` hold only patch bytes (28 and 511 bytes written), not the game.
+Everything this project uses but did not write, with its license. **No third-party software is
+redistributed in this repo**: each piece is installed or downloaded separately. The one exception
+to "nothing third-party in the repo" is game content: the screenshots and the short recording
+listed under "The game" below are frames from the game. The IPS files in `patches/` hold only
+patch bytes (28 and 511 bytes written), not the game.
 
 Licenses were taken from each upstream's license file at the version this project uses (checked
 2026-11-20), or from the installed package's metadata or copyright file for system and indirect

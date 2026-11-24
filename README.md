@@ -32,7 +32,8 @@ game: a raw DOS-order, 143,360-byte, 35-track `.dsk` with SHA-256 starting `5898
 
 ## Quick start
 
-Requirements: Python 3.11 or newer (standard library only; the scripts refuse older versions), Node 24 or newer, and `shellcheck`.
+Requirements: Linux with bash 5 or newer, Python 3.11 or newer (standard library only),
+Node 24 or newer, and `shellcheck`. The Python and Node scripts refuse older versions with a clear message.
 Chromium and an Apple2TS web build are needed only for the emulator tools (see
 [`tools/README-a2ts.md`](tools/README-a2ts.md)). [CiderPress II](https://ciderpress2.com/) is
 optional: if `apps/cp2/cp2` exists, `tools/verify.sh` also checks each rebuilt image's DOS 3.3
@@ -42,9 +43,11 @@ End of support (from [endoflife.date](https://endoflife.date/), checked 2026-11-
 2028-04-30, Python 3.11 (the minimum) on 2027-10-31, and the CI runner image (Ubuntu 24.04) on
 2029-05-31. Before a date passes, move to the next supported release: update the version here, in
 `CLAUDE.md`, `CONTRIBUTING.md`, `docs/Third-Party.md`, `package.json` (`engines`), `pyproject.toml`
-(`target-version`), the version checks in the Python scripts and `tools/test.sh`/`tools/verify.sh`,
-and `.github/workflows/ci.yml`, then run `tools/test.sh` and `tools/lint.sh`
-(`tests/test_min_python.py` catches a place that was missed).
+(`target-version`), the version checks in the Python and Node scripts and in
+`tools/test.sh`/`tools/verify.sh`, and `.github/workflows/ci.yml`, then run `tools/test.sh` and
+`tools/lint.sh` (`tests/test_min_versions.py` catches a place that was missed). If the CI Python
+versions change, also update the required checks (`test (3.x)`, `audit`) in the repository's
+`require-ci` ruleset on GitHub, or pull requests will wait for a check that never runs.
 
 ```sh
 tools/verify.sh                      # rebuild every patched image from your game image and check hashes (~1 s)

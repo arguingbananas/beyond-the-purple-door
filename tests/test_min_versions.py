@@ -1,5 +1,9 @@
-"""The minimum Python version is stated in several places; check they agree with pyproject.toml."""
+"""The minimum Python and Node versions are stated in several places; check they all agree.
 
+Python: pyproject.toml (ruff target-version). Node: package.json ("engines").
+"""
+
+import json
 import re
 import sys
 import tomllib
@@ -13,6 +17,8 @@ ENTRY_SCRIPTS = [
     "tools/cp2_check.py",
 ]
 SHELL_RUNNERS = ["tools/test.sh", "tools/verify.sh"]
+NODE_SCRIPTS = ["tools/a2ts_bridge.mjs", "tools/a2ts_ctl.mjs"]
+DOCS = ["README.md", "CONTRIBUTING.md", "CLAUDE.md"]
 
 
 def minimum() -> tuple[int, int]:
@@ -42,10 +48,40 @@ class MinimumPythonTest(unittest.TestCase):
 
     def test_docs_state_the_minimum(self):
         major, minor = minimum()
-        for rel in ["README.md", "CONTRIBUTING.md", "CLAUDE.md"]:
+        for rel in DOCS:
             with self.subTest(rel):
                 text = (ROOT / rel).read_text()
                 self.assertRegex(text, rf"Python {major}\.{minor}(\+| or newer)")
+
+
+def node_minimum() -> int:
+    engines = json.loads((ROOT / "package.json").read_text())["engines"]["node"]  # e.g. ">=24"
+    match = re.fullmatch(r">=(\d+)", engines)
+    if match is None:
+        raise AssertionError(f"package.json engines.node should be '>=N', not {engines!r}")
+    return int(match.group(1))
+
+
+class MinimumNodeTest(unittest.TestCase):
+    def test_scripts_check_the_same_minimum(self):
+        major = node_minimum()
+        for rel in NODE_SCRIPTS:
+            text = (ROOT / rel).read_text()
+            with self.subTest(rel):
+                self.assertIn(f"process.versions.node.split('.')[0]) < {major})", text)
+                self.assertIn(f"needs Node {major} or newer", text)
+
+    def test_ci_uses_the_minimum(self):
+        ci = (ROOT / ".github/workflows/ci.yml").read_text()
+        versions = re.findall(r'node-version: "(\d+)"', ci)
+        self.assertTrue(versions, "CI sets no node-version")
+        self.assertEqual(set(versions), {str(node_minimum())})
+
+    def test_docs_state_the_minimum(self):
+        major = node_minimum()
+        for rel in DOCS:
+            with self.subTest(rel):
+                self.assertRegex((ROOT / rel).read_text(), rf"Node {major}(\+| or newer)")
 
 
 if __name__ == "__main__":
