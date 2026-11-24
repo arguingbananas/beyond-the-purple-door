@@ -1,11 +1,19 @@
+# Maintenance mode: version updates come once a month, one grouped PR per ecosystem.
+# Security updates are separate and still open as soon as an advisory is published.
 version: 2
 updates:
   - package-ecosystem: pip
     directory: /
-    schedule: { interval: weekly }
+    schedule: { interval: monthly }
+    groups:
+      pip: { patterns: ["*"] }
   - package-ecosystem: npm
     directory: /
-    schedule: { interval: weekly }
+    schedule: { interval: monthly }
+    groups:
+      npm: { patterns: ["*"] }
   - package-ecosystem: github-actions
     directory: /
-    schedule: { interval: weekly }
+    schedule: { interval: monthly }
+    groups:
+      actions: { patterns: ["*"] }

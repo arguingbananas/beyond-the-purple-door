@@ -12,6 +12,10 @@ background to test them.
 > I directed the work and play-tested the patched game. Commits an assistant wrote or co-wrote
 > name it in a `Co-Authored-By` trailer.
 
+**Status: complete (v1.0.0, 2026-11-24).** The purple door is passable and the patches are
+verified. The project is in maintenance mode: dependency and security updates only. Open questions
+and possible follow-ups are in [`ROADMAP.md`](ROADMAP.md).
+
 - **Patches** take a disk image of the game in, and write a new, patched image out. Nothing here is
   the game itself.
 - **Tools** rebuild and verify the patched images by hash, and run Apple2TS headless (no window) so a

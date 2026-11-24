@@ -1,9 +1,17 @@
 # Changelog
 
-All notable changes to this project. Format follows [Keep a Changelog](https://keepachangelog.com/);
-there are no tagged releases yet.
+All notable changes to this project. Format follows [Keep a Changelog](https://keepachangelog.com/).
+Releases are git tags only; nothing built is published.
 
 ## Unreleased
+
+## 1.0.0 - 2026-11-24
+
+The project's goal is met: the purple door in room `$3C` is passable. Maintenance mode from here.
+
+### Changed
+- Dependabot version updates are monthly and grouped into one pull request per ecosystem
+  (security updates still open at once).
 
 ### Added
 - `SECURITY.md` lists the repository protections: no deletion or force push of `main`, CI
