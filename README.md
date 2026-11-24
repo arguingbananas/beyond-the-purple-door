@@ -4,6 +4,14 @@ Patches and tools for making the purple door in the cabinet room of *Beyond Cast
 (Muse Software, 1984, Apple II, DOS 3.3) passable, plus a way to drive the Apple2TS emulator in the
 background to test them.
 
+> [!NOTE]
+> **Made with AI.** This project was built with AI coding assistants working under my direction:
+> the first version of the patch with [GitHub Copilot](https://github.com/features/copilot), and
+> the patches, tools, tests and documentation since then with
+> [Claude Code](https://www.anthropic.com/claude-code), Anthropic's AI coding assistant (Claude).
+> I directed the work and play-tested the patched game. Commits an assistant wrote or co-wrote
+> name it in a `Co-Authored-By` trailer.
+
 - **Patches** take a disk image of the game in, and write a new, patched image out. Nothing here is
   the game itself.
 - **Tools** rebuild and verify the patched images by hash, and run Apple2TS headless (no window) so a

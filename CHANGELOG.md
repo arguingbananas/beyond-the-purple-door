@@ -6,6 +6,8 @@ there are no tagged releases yet.
 ## Unreleased
 
 ### Added
+- A note at the top of the README that the project was made with AI: GitHub Copilot for the first
+  version of the patch, Claude Code (Anthropic) since.
 - `reference/cabinet-room.webp`: a 64 s recording of the patched cabinet room (player, guard and
   the now-passable purple door), shown at the top of the README.
 - `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1), issue and pull request templates.
