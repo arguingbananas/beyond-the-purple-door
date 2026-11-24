@@ -13,7 +13,7 @@ packages.
 | What | Rights | Notes |
 |---|---|---|
 | *Beyond Castle Wolfenstein* (Muse Software, 1984) | Copyrighted; belongs to its rights holders | Not in the repo. The patches target the [4am crack](https://archive.org/details/Passport4am) (SHA-256 `5898ae8f...`). |
-| Screenshots in `reference/` and `tools/refs/` | Frames from the game | Included to document the room and drive the emulator menus; not covered by this repo's MIT license. |
+| Screenshots in `reference/` and `tools/refs/`, and the recording `reference/cabinet-room.webp` | Frames from the game | Included to document the room and drive the emulator menus; not covered by this repo's MIT license. |
 
 ## Used to run the tools
 

@@ -6,6 +6,8 @@ there are no tagged releases yet.
 ## Unreleased
 
 ### Added
+- `reference/cabinet-room.webp`: a 64 s recording of the patched cabinet room (player, guard and
+  the now-passable purple door), shown at the top of the README.
 - `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1), issue and pull request templates.
 - End-of-support dates for Node, Python and the CI image, and the steps to move on, in the README.
 - `SECURITY.md` says what the project does not defend against.

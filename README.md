@@ -11,6 +11,10 @@ background to test them.
 
 Who it is for: people modding or studying the game, and anyone who wants to script Apple2TS.
 
+![Recording of the patched cabinet room: the player and a guard, with the purple door no longer blocking](reference/cabinet-room.webp)
+
+*The patched game, recorded in Apple2TS: the purple door (magenta, right of the table) no longer blocks anyone.*
+
 ## You supply the game
 
 The game image is copyrighted and is **not** in this repo. The patches target the 4am crack of the
@@ -71,7 +75,7 @@ Nothing needs to be set; these only override the defaults.
 | `tools/` | `verify.sh`, `test.sh`, `ips_apply.py`, and the headless emulator scripts. |
 | `tests/` | Unit tests (`unittest` and `node:test`). Tests that need the game image skip without it. |
 | `examples/` | Small runnable scripts: patch an image, read the room number from the emulator. |
-| `reference/` | Screenshots of the room. |
+| `reference/` | Screenshots and a short recording (`cabinet-room.webp`) of the room. |
 | `apps/`, `a2ts-web/` | Local only and gitignored: the Apple2TS AppImage, its web build and saved emulator states. |
 
 Start with [`docs/Project-Notes.md`](docs/Project-Notes.md); [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) explains how the pieces fit, and [`ROADMAP.md`](ROADMAP.md) lists what is next. The local patch affects only room `$3C`,
@@ -90,8 +94,8 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md); in short:
 
 The code and documentation in this repo are [MIT licensed](LICENSE). That does not cover the game,
 which belongs to its rights holders, or the 4am crack of it ([archive.org](https://archive.org/details/Passport4am)).
-The screenshots in `reference/` and `tools/refs/` are frames from the game, included to document the
-room and to drive the emulator menus.
+The screenshots and the recording in `reference/` and `tools/refs/` are frames from the game, included
+to document the room and to drive the emulator menus.
 
 The emulator tools use [Apple2TS](https://github.com/ct6502/apple2ts) by Chris Torrence (CT6502),
 which is MIT licensed, running in [Chromium](https://www.chromium.org/) (BSD-3-Clause). Its web build
