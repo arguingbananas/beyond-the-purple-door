@@ -5,6 +5,7 @@
 set -euo pipefail
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$here"
+python3 -I -c 'import sys; sys.exit(0 if sys.version_info >= (3, 11) else "tools/test.sh: needs Python 3.11 or newer")'
 python3 -I -m unittest discover -s tests -v
 node --test tests/*.mjs
 if [ -f "${BCW_IMAGE:-Beyond Castle Wolfenstein (4am crack)/Beyond Castle Wolfenstein (4am crack).dsk}" ]; then

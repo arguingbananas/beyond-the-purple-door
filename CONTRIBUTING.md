@@ -6,8 +6,8 @@ Thanks for looking. This is a small hobby project; issues and pull requests are 
 ```sh
 python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt && npm ci
 ```
-You need Python 3.12, Node 24+, and `shellcheck`. Supply your own game image (see the README); the
-tests that need it skip themselves without it.
+You need Python 3.11 or newer, Node 24+, and `shellcheck`. Supply your own game image (see the
+README); the tests that need it skip themselves without it.
 
 ## Git hook (recommended)
 ```sh

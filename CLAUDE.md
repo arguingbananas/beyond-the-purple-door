@@ -4,9 +4,9 @@ Patches and tools that make the purple door in room `$3C` passable, plus headles
 Read `docs/Project-Notes.md` first; the README has setup.
 
 ## Environment
-- Python 3.12 (stdlib only), Node 24+, shellcheck. Emulator tools also need Chromium
-  and an Apple2TS web build in `a2ts-web/`, extracted from `apps/Apple2TS.AppImage` (desktop app
-  pinned to v1.6.9, see `tools/README-a2ts.md`). Never run the AppImage directly: it replaces itself
+- Python 3.11+ (stdlib only; the minimum is set in `pyproject.toml`), Node 24+, shellcheck.
+  Emulator tools also need Chromium and an Apple2TS web build in `a2ts-web/`, extracted from
+  `apps/Apple2TS.AppImage` (desktop app pinned to v1.6.9, see `tools/README-a2ts.md`). Never run the AppImage directly: it replaces itself
   with the latest release. Run the extracted `apps/Apple2TS-1.6.9/squashfs-root/AppRun` instead.
   `apps/` and `a2ts-web/` are gitignored. Optional: CiderPress II in
   `apps/cp2/` for the filesystem check in `tools/verify.sh` (`cp2 test` alone reports "no failures" for a

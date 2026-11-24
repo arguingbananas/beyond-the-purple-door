@@ -6,6 +6,8 @@ there are no tagged releases yet.
 ## Unreleased
 
 ### Added
+- Python 3.11 is now the enforced minimum: the scripts and `tools/test.sh`/`tools/verify.sh` exit
+  with a clear message on older versions, ruff targets 3.11, and CI tests 3.11, 3.12 and 3.15.
 - A note at the top of the README that the project was made with AI: GitHub Copilot for the first
   version of the patch, Claude Code (Anthropic) since.
 - `reference/cabinet-room.webp`: a 64 s recording of the patched cabinet room (player, guard and

@@ -19,7 +19,7 @@ packages.
 
 | Software | Version used | License | Used for |
 |---|---|---|---|
-| [Python](https://www.python.org/) | 3.12 | [PSF-2.0](https://docs.python.org/3/license.html) | Patchers, `ips_apply.py`, `cp2_check.py`, tests |
+| [Python](https://www.python.org/) | 3.11 or newer (CI: 3.11, 3.12, 3.15) | [PSF-2.0](https://docs.python.org/3/license.html) | Patchers, `ips_apply.py`, `cp2_check.py`, tests |
 | [Node.js](https://nodejs.org/) | 24 | [MIT](https://github.com/nodejs/node/blob/main/LICENSE) | Bridge and control scripts, Node tests |
 | [Apple2TS](https://github.com/ct6502/apple2ts) by Chris Torrence and contributors | web build 3.7.0 | [MIT](https://github.com/ct6502/apple2ts/blob/v3.7.0/LICENSE) | The emulator, run headless |
 | [Apple2TS desktop app](https://github.com/ct6502/apple2ts-app) | 1.6.9 (pinned; see `tools/README-a2ts.md`) | [MIT](https://github.com/ct6502/apple2ts-app/blob/v1.6.9/LICENSE) | Source of the web build; playing by hand |

@@ -23,6 +23,14 @@ from dos33 import (
     sector_offset,
 )
 
+# Minimum Python, kept in step with pyproject.toml target-version. Ruff assumes that version and
+# calls this check dead code (UP036); it is for people running an older python3.
+if sys.version_info < (3, 11):  # noqa: UP036
+    sys.exit(
+        "apply_bcw_purple_door_patch.py: needs Python 3.11 or newer "
+        f"(this is {sys.version.split()[0]})"
+    )
+
 STUB_ADDRESS = 0x1EB3
 STUB = bytes.fromhex(
     "CA"  # DEX

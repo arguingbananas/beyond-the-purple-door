@@ -5,6 +5,7 @@
 set -euo pipefail
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 v="${1:-$here/Beyond Castle Wolfenstein (4am crack)/Beyond Castle Wolfenstein (4am crack).dsk}"
+python3 -I -c 'import sys; sys.exit(0 if sys.version_info >= (3, 11) else "tools/verify.sh: needs Python 3.11 or newer")'
 tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
 fail=0
 check() { # name file expected-prefix

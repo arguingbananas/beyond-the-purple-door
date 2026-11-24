@@ -18,6 +18,11 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+# Minimum Python, kept in step with pyproject.toml target-version. Ruff assumes that version and
+# calls this check dead code (UP036); it is for people running an older python3.
+if sys.version_info < (3, 11):  # noqa: UP036
+    sys.exit(f"cp2_check.py: needs Python 3.11 or newer (this is {sys.version.split()[0]})")
+
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CP2 = ROOT / "apps" / "cp2" / "cp2"
 

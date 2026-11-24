@@ -8,6 +8,11 @@ half-patched image.
 import os
 import sys
 
+# Minimum Python, kept in step with pyproject.toml target-version. Ruff assumes that version and
+# calls this check dead code (UP036); it is for people running an older python3.
+if sys.version_info < (3, 11):  # noqa: UP036
+    sys.exit(f"ips_apply.py: needs Python 3.11 or newer (this is {sys.version.split()[0]})")
+
 
 def apply_ips(img: bytearray, p: bytes) -> bytearray:
     if p[:5] != b"PATCH":
